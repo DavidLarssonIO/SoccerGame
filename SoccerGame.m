@@ -5,3 +5,4 @@ subFieldSize = [2 2];
 field = GenerateField(nPlayers,subFieldSize);
 field = eye(size(field));
 PlotField(field,time,subFieldSize)
+%HEj
