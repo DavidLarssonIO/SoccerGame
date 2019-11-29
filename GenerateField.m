@@ -4,4 +4,4 @@ function field = GenerateField(nPlayers,subFieldSize)
     xSubFieldSize = subFieldSize(1);
     ySubFieldSize = subFieldSize(2);
     field = zeros(XPlayers*xSubFieldSize,YPlayers*ySubFieldSize);
-end
+end%Hej
