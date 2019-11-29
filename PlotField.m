@@ -1,4 +1,4 @@
-function [] = PlotField(field,time,subFieldSize)
+function [] = PlotField(field,time,subFieldSize) %Bra jobbbat!
 [w,l] = size(field);
 imagesc((1:w)+0.5, (1:l)+0.5,field);
 axis equal
