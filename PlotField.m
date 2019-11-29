@@ -19,3 +19,4 @@ str = string(num);
 yticklabels(str);
 drawnow
 end
+%hej hopp
