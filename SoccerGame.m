@@ -27,5 +27,5 @@ timeSync = 0.001;
 
 for time = 1:timeSteps/timeDelta
     field = Update(players, ball, timeSync, timeDelta);
-    PlotField(field, timeSteps/timeDelta);
+    PlotField(field, time);
 end
