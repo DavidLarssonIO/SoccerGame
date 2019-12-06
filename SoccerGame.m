@@ -1,3 +1,5 @@
+%% main
+
 clc, clf, clear
 time = 0;
 nPlayers = [3 3];
