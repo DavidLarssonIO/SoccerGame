@@ -6,6 +6,8 @@ function [updatedPlayer, updatedBall] = PlayerAction(player, otherPlayersPositio
 % Static paramter values
 goalPosition = [1 0];
 
+% Jag tänker att vi kanske vill att spelare skall ha en grundposition som
+% de ibland går tillbaks på som en parameter?
 
 % Dynamic parameter values
 % This distance is equal to 1% of the field size
@@ -25,7 +27,7 @@ moveLikelihood = 1;
 kickBallAccuracy = 1;
 passBallAccuracy = 1;
 
-kickBallAcceleration = 1; 
+kickBallAcceleration = 1; %tänker mig en funktion som den jag började på för detta (KickBall.m)
 passBallAcceleration = 1;
 
 
