@@ -6,7 +6,7 @@ set(gca, 'XTick', 1:subFieldSize(1):w+1, 'YTick', 1:subFieldSize(2):l+1, ...
     'XLim', [1 w+1], 'YLim', [1 l+1], ...
     'GridLineStyle', '-', 'XGrid', 'on', 'YGrid', 'on');
 title(['$t = $ ' num2str(time)],'Interpreter','latex')
-map = [ 1 1 1
+map = [ 0 0.5 0
         0 0 0
         1 1 0];
 colormap(map);
