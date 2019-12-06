@@ -13,17 +13,18 @@ playerVelocities=zeros(2,totalPlayers); %one column for every player
 %radians)
 
 % Starting Positions below
-diff_length=fieldLength/(playersLongSide+2)
-xPositions=linspace(-fieldLength/2,0,diff_length);
-diff_width=fieldWidth/(playersShortSide+2);
-yPositions=linspace(-fieldWidth/2,fieldWidth/2,diff_width);
+%diff_length=fieldLength/(playersLongSide+2)
+xPositions=linspace(-fieldLength/2,0,playersLongSide+2);
+%diff_width=fieldWidth/(playersShortSide+2);
+yPositions=linspace(-fieldWidth/2,fieldWidth/2,playersShortSide+2);
 for i=1:playersLongSide
     for j=1:playersShortSide
         playerPositions(1,(i-1)*playersLongSide+j)=xPositions(i+1);
         playerPositions(2,(i-1)*playersLongSide+j)=yPositions(j+1); %y-position
     end
 end
-        
+playerPositions=[playerPositions(:,1:totalPlayers/2), -flip(playerPositions(:,1:totalPlayers/2),2)]
+%Jag avslutar här då jag inte riktigt klara spegla matriser    
     
         
 
