@@ -25,7 +25,7 @@ timeDelta = 0.1;
 % Time between drawing of each plot
 timeSync = 0.001;
 
-for time = 1:timeSteps
+for time = 1:timeSteps/timeDelta
     field = Update(players, ball, timeSync, timeDelta);
-    PlotField(field, time);
+    PlotField(field, timeSteps/timeDelta);
 end
