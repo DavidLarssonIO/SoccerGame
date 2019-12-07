@@ -1,10 +1,12 @@
-function kickAcceleration = KickBall(player, ball,target)
+function kickAcceleration = KickBall(player, ball, target, skill?)
 
 %förslag på hur en kickfunktion kan se ut
-targetVector = (target - player(:,:,1));
+playerPosition = player(:,:,1);
+targetVector = (target - playerPosition);
 distance = norm(targetVector);
 playerSkill = player(XXX);
-inaccuracy = distance+/playerSkill;
+ballVelocity = norm(ball(:,:,2));
+inaccuracy = (distance + ballVelocity)/playerSkill;
 xError = normrnd(0, inaccuracy);
 yError = normrnd(0, inaccuracy);
 unitAccelerationVector = (target + [xError yError])/norm((target + [xError yError]));
