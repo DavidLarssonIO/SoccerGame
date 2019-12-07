@@ -4,10 +4,14 @@ function [updatedPlayer, updatedBall] = PlayerAction(player, otherPlayersPositio
 % comparing different players 
 
 % Static paramter values
-goalPosition = [1 0];
+goalPosition = [1 0]; % Är planen i landskap- eller porträttformat?
 
 % Jag tänker att vi kanske vill att spelare skall ha en grundposition som
 % de ibland går tillbaks på som en parameter?
+
+% Eftersom vi användder både acceleration och velocity och rikning så
+% vi nog anta att alla spelare är vända åt det håll de färdas.
+% Men actions mot boll kan begransas till abs(tan(y/x)) < tan(pi/2) tex.
 
 % Dynamic parameter values
 % This distance is equal to 1% of the field size
@@ -31,7 +35,9 @@ kickBallAcceleration = 1; %tänker mig en funktion som den jag började på för
 passBallAcceleration = 1;
 
 
-
+% Om jag förstår det rätt så är bollens position en rad, medan
+% otherPlayersPositions ger positionen i en kolumn. Vi bör nog representera
+% koordinater alltid som rad eller kolumn.
 % Calc distance to ball
 % TODO make sure that x,y formating is correct
 [xPositionPlayer, yPositionPlayer] = player(:,:,1);

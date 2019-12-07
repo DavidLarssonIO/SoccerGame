@@ -23,7 +23,7 @@ newVy = yVel + newAy*timeDelta;
 newPx = xPos + newVx*timeDelta;
 newPy = yPos + newVy*timeDelta;
 
-% Här uppdateras bollens position. Vi Bara så den inte också uppdateras i
+% Här uppdateras bollens position. Bara så den inte också uppdateras i
 % UpdateBall.m i samma deltaT.
 updatedBall(:,:,1) = [newPx, newPy];
 updatedBall(:,:,2) = [newVx, newVy];
