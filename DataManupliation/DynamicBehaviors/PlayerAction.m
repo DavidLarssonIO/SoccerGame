@@ -25,9 +25,9 @@ actionGoalDistance = 0.2;
 
 kickBallLikelihood = 0.4;
 passBallLikelihood = 0.4;
-moveLikelihood = 0.3;
+doNothingWithBallLikelihood = 0.3;
 
-sumOfLikelihoods = kickBallLikelihood + passBallLikelihood + moveLikelihood;
+sumOfLikelihoods = kickBallLikelihood + passBallLikelihood + doNothingWithBallLikelihood;
 if sumOfLikelihoods ~= 1
     
     ME = MException('The sum of the likelyhoods has to equal 1. They are currently summed to %s',sumOfLikelihoods);
@@ -65,13 +65,13 @@ if distanceToBall < actionBallDistance
     kickLikeRange = kickBallLikelihood;
     passLikeRange = kickBallLikelihood + passBallLikelihood;
     
-    if whatTodo < kickLikeRange
-    
+    if whatTodo <= kickLikeRange
+        targetPosition = goalPosition;
         ball = KickBall(ball, kickBallSigma, kickBallAcceleration, targetPosition, timeDelta);
     end
 
-    if whatTodo >= kickLikeRange && whatTodo < passLikeRange
-
+    if whatTodo > kickLikeRange && whatTodo <= passLikeRange
+        targetPosition = min(distanceToOtherPlayers);
         ball = PassBall(ball, passBallSigma, passBallAcceleration, targetPosition, timeDelta);
     end
     
