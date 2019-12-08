@@ -1,4 +1,4 @@
-function [playerPositions,playerVelocities] = InitializePlayers(nPlayers,fieldSize)
+function [playerPositions, playerVelocities, playerAttributes] = InitializePlayers(nPlayers,fieldSize)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 playersShortSide=nPlayers(1);

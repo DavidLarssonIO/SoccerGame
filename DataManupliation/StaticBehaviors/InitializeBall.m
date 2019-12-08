@@ -1,7 +1,8 @@
-function [outputArg1,outputArg2] = InitializeBall(inputArg1,inputArg2)
-%INITIALIZEBALL Summary of this function goes here
-%   Detailed explanation goes here
-outputArg1 = inputArg1;
-outputArg2 = inputArg2;
+function [ballPosition, ballVelocity, ballAcceleration] = InitializeBall(startPosition)
+% This function intitilize the ball matrix on a given start position
+
+ballPosition = startPosition;
+[ballVelocity, ballAcceleration] = deal([0 0]);
+
 end
 

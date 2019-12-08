@@ -4,7 +4,7 @@
 
 players = InitializePlayers();
 % Example of the player state array
-[playerPosition, playerVelocity] = players(1);
+[playerPosition, playerVelocit, playerAttributes] = players(1);
 % Example of the player state position
 % Where xPos,yPos range -1<x,y<1
 [xPosPlayer, yPosPlayer] = playerPosition;
