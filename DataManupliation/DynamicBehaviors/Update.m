@@ -3,7 +3,7 @@ function [field] = Update(players, ball, timeSync, timeDelta)
 
 [updatedPlayers, updatedBall] = UpdatePlayers(players, ball, timeDelta);
 
-updatedPlayersPositions = updatedPlayers(1,:,:);
+updatedPlayersPositions = updatedPlayers(1,:,:,:);
 updatedBallPosition = updatedBall(1,:,:);
 
 updatedField = UpdateField(updatedPlayersPositions, updatedBallPosition);
