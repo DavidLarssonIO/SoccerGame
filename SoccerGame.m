@@ -1,6 +1,5 @@
 %% Main game file
 
-
 % Initialzing values
 
 players = InitializePlayers();
@@ -19,11 +18,13 @@ ball = InitializeBall();
 
 
 % Timesteps of the simulation in seconds
-timeSteps = 100;
+timeSteps = 5400;
 % The gametime elapsed between every update
-timeDelta = 0.1;
+timeDelta = 1;
 % Time between drawing of each plot
-timeSync = 0.001;
+timeSync = 0.1;
+
+% Whit these settings one simulation will take 54 seconds
 
 for time = 1:timeSteps/timeDelta
     field = Update(players, ball, timeSync, timeDelta);
