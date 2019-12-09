@@ -1,16 +1,14 @@
 function [updatedPlayers, updatedBall] = UpdatePlayers(players, ball, timeDelta)
 %This function updates the state of all the players and the ball
 
-playersObjectSize = size(players);
-nPlayerAttributes = playersObjectSize(end-1);
-nPlayers = playersObjectSize(end);
+nAttributes = size(players{3},2);
+nPlayers = size(players{1},1);
 % TODO, make sure the row/column formating is correct here
-updatedPlayers = zeros(2,2,nPlayerAttributes,nPlayers);
+updatedPlayers = {zeros(nPlayers,2), zeros(nPlayers,2),  zeros(nPlayers,nAttributes)};
 
 for indexOfPlayer = 1:nPlayers
     % TODO, make sure the row/column formating is correct here
     [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlayer, timeDelta);
-    updatedPlayers(:,:,:,indexOfPlayer) = updatedPlayer;
 end
 % TODO: Add ballAction function here since it only should update once
 

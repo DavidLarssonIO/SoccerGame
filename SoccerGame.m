@@ -24,6 +24,6 @@ timeSync = 0.1;
 % Whit these settings one simulation will take 54 seconds
 
 for time = 1:timeSteps/timeDelta
-    field = Update(players, ball, timeSync, timeDelta);
-    PlotField(field, time);
+    [players, ball] = Update(players, ball, timeSync, timeDelta);
+    PlotField(players, ball, time);
 end
