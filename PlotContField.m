@@ -64,7 +64,7 @@ plot(X(1:100),Y(1:100),'w',X(101:200),Y(101:200),'w',...
     X(201:300),Y(201:300),'w')
 hold on
 axis equal
-axis([-70 70 -50 50])
+axis(1.15/2*[-l l -s s])
 set(gca,'Color','#32CD32')
 end
 
