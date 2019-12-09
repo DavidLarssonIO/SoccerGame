@@ -24,7 +24,7 @@ for i=1:playersLongSide
         playerPositions(2,(i-1)*playersLongSide+j)=yPositions(j+1); %y-position
     end
 end
-playerPositions=[playerPositions(:,1:totalPlayers/2), -flip(playerPositions(:,1:totalPlayers/2),2)]
+playerPositions=[playerPositions(:,1:totalPlayers/2), -flip(playerPositions(:,1:totalPlayers/2),2)];
 %Speglar matrisen för att få motståndarlagets startpositioner
 
 
