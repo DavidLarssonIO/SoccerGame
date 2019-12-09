@@ -12,5 +12,7 @@ for indexOfPlayer = 1:nPlayers
     [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlayer, timeDelta);
     updatedPlayers(:,:,:,indexOfPlayer) = updatedPlayer;
 end
+% TODO: Add ballAction function here since it only should update once
+
 
 end
