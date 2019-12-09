@@ -2,19 +2,16 @@
 
 % Initialzing values
 
-players = InitializePlayers();
-% Example of the player state array
-[playerPosition, playerVelocit, playerAttributes] = players(1);
-% Example of the player state position
-% Where xPos,yPos range -1<x,y<1
-[xPosPlayer, yPosPlayer] = playerPosition;
+nPlayers = 18;
+field = [120 90];
+attributes = [0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1]';
 
+players = InitializePlayers(nPlayers, field, attributes);
+startPosition = [0;0];
+startVel = [0;0];
+startAcc = [0;0];
 
-ball = InitializeBall();
-% Example of the ball state array
-[ballPosition, ballVelocity, ballAcceleration] = ball;
-% Where xPos,yPos range -1<x,y<1
-[xPosBall, yPosBall] = ballPosition;
+ball = InitializeBall(startPosition, startVel, startAcc);
 
 
 % Timesteps of the simulation in seconds

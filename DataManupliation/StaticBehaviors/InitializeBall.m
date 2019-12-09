@@ -1,8 +1,7 @@
-function [ballPosition, ballVelocity, ballAcceleration] = InitializeBall(startPosition)
+function [ball] = InitializeBall(startPosition, startVel, startAcc)
 % This function intitilize the ball matrix on a given start position
 
-ballPosition = startPosition;
-[ballVelocity, ballAcceleration] = deal([0 0]);
+ballPosition 
 
 end
 
