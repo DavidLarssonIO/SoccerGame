@@ -26,10 +26,11 @@ timeSync = 0.1;
 
 % Whit these settings one simulation will take 54 seconds
 
-%for time = 1:timeSteps/timeDelta
-%    [players, ball] = Update(players, ball, timeSync, timeDelta);
-    %PlotPlayers(players, [], time);
-%    [plotTeam1,plotTeam2] = PlotPlayers(players,plotTeam1,plotTeam2)
-%end
-
-[plotTeam1,plotTeam2] = PlotPlayers(players,plotTeam1,plotTeam2)
+for time = 1:timeSteps/timeDelta
+    [players, ball] = Update(players, ball, timeSync, timeDelta);
+    PlotConField(field)
+    PlotPlayers(players)
+end
+clf
+PlotConField(field)
+PlotPlayers(players)
