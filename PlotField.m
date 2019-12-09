@@ -20,4 +20,3 @@ yticklabels(str);
 drawnow
 end
 % hej
-
