@@ -1,6 +1,7 @@
 function [playerPositions,playerVelocities] = InitializePlayers(nPlayers,fieldSize)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%Initialiserar spelarnas positioner och hastigheter vid avspark.
+%Positionerna sätts till en realistisk avspark och hastigheterna är 0.
+
 playersShortSide=nPlayers(1);
 playersLongSide=nPlayers(2);
 fieldLength=fieldSize(1);
@@ -24,9 +25,8 @@ for i=1:playersLongSide
     end
 end
 playerPositions=[playerPositions(:,1:totalPlayers/2), -flip(playerPositions(:,1:totalPlayers/2),2)]
-%Jag avslutar här då jag inte riktigt klara spegla matriser    
-    
-        
+%Speglar matrisen för att få motståndarlagets startpositioner
+
 
 end
 
