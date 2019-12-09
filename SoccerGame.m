@@ -13,6 +13,9 @@ startAcc = [0;0];
 
 ball = InitializeBall(startPosition, startVel, startAcc);
 
+plotTeam1 = [];
+plotTeam2 = [];
+
 
 % Timesteps of the simulation in seconds
 timeSteps = 5400;
@@ -23,7 +26,10 @@ timeSync = 0.1;
 
 % Whit these settings one simulation will take 54 seconds
 
-for time = 1:timeSteps/timeDelta
-    [players, ball] = Update(players, ball, timeSync, timeDelta);
-    PlotField(players, ball, time);
-end
+%for time = 1:timeSteps/timeDelta
+%    [players, ball] = Update(players, ball, timeSync, timeDelta);
+    %PlotPlayers(players, [], time);
+%    [plotTeam1,plotTeam2] = PlotPlayers(players,plotTeam1,plotTeam2)
+%end
+
+[plotTeam1,plotTeam2] = PlotPlayers(players,plotTeam1,plotTeam2)
