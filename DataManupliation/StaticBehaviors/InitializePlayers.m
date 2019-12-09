@@ -1,16 +1,13 @@
-function [playerPositions, playerVelocities, playerAttributes] = InitializePlayers(nPlayers,fieldSize)
+function [players] = InitializePlayers(nPlayers,fieldSize,attributes)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
-playersShortSide=nPlayers(1);
-playersLongSide=nPlayers(2);
+playersShortSide=nPlayers/6;
+playersLongSide=nPlayers/6;
 fieldLength=fieldSize(1);
 fieldWidth=fieldSize(2);
-totalPlayers=2*playersShortSide*playersLongSide; %2 teams
-playerPositions=zeros(2,totalPlayers); %one column for every player
-%first row is x-position, second row is y-position
-playerVelocities=zeros(2,totalPlayers); %one column for every player
-%first row is speed (a scalar) and the second row is orientation (in
-%radians)
+nAttributes=size(attributes,2);
+
+players = {zeros(nPlayers,2),zeros(nPlayers,2),zeros(nPlayers,nAttributes)};
 
 % Starting Positions below
 %diff_length=fieldLength/(playersLongSide+2)
@@ -19,13 +16,17 @@ xPositions=linspace(-fieldLength/2,0,playersLongSide+2);
 yPositions=linspace(-fieldWidth/2,fieldWidth/2,playersShortSide+2);
 for i=1:playersLongSide
     for j=1:playersShortSide
-        playerPositions(1,(i-1)*playersLongSide+j)=xPositions(i+1);
-        playerPositions(2,(i-1)*playersLongSide+j)=yPositions(j+1); %y-position
+        players{1}((i-1)*playersShortSide+j,1)=xPositions(i+1);
+        players{1}((i-1)*playersShortSide+j,2)=yPositions(j+1); %y-position
     end
 end
-playerPositions=[playerPositions(:,1:totalPlayers/2), -flip(playerPositions(:,1:totalPlayers/2),2)]
-%Jag avslutar här då jag inte riktigt klara spegla matriser    
-    
+players{1}=[players{1}(1:nPlayers/2,:); -players{1}(1:nPlayers/2,:)];
+   
+%Fixing angles, velocities=0 in the begining
+players{2}(nPlayers/2+1:end,2)=pi;
+
+%attributes
+players{3}=attributes;
         
 
 end
