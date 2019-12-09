@@ -1,3 +1,3 @@
 %Testfil
 
-[playerPositions,playerVelocities] = InitializePlayers([3 3],[2 2])
+[playerPositions,playerVelocities] = InitializePlayers([3 3],[90 60])
