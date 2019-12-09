@@ -1,5 +1,9 @@
 %% Main game file
 
+clear all
+clf
+clc
+
 % Initialzing values
 
 nPlayers = 18;

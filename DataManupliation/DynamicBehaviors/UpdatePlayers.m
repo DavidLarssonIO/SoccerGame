@@ -14,6 +14,6 @@ for indexOfPlayer = 1:nPlayers
     updatedPlayers{3}(indexOfPlayer,:) = updatedPlayer{3};
 end
 % TODO: Add ballAction function here since it only should update once
-updatedBall = UpdateBallPosition(updatedBall, timeDelta, []);
+%updatedBall = UpdateBallPosition(updatedBall, timeDelta, []);
 
 end
