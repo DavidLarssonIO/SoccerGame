@@ -8,21 +8,19 @@ clc
 
 nPlayers = 18;
 field = [120 90];
-attributes = [0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1]';
+attributes = [0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 ...
+           ]';
 
 players = InitializePlayers(nPlayers, field, attributes);
 startPosition = [0;0];
-startVel = [0;0];
+startVel = [1;heaviside(randn)*-pi];
 startAcc = [0;0];
 
 ball = InitializeBall(startPosition, startVel, startAcc);
 
-plotTeam1 = [];
-plotTeam2 = [];
-
 
 % Timesteps of the simulation in seconds
-timeSteps = 5400;
+timeSteps = 90;
 % The gametime elapsed between every update
 timeDelta = 1;
 % Time between drawing of each plot
@@ -34,6 +32,7 @@ for time = 1:timeSteps/timeDelta
     [players, ball] = Update(players, ball, timeSync, timeDelta);
     PlotConField(field)
     PlotPlayers(players)
+    scatter(ball(1,1),ball(1,2),18,'k','filled')
 end
 clf
 PlotConField(field)

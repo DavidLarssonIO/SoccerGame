@@ -22,8 +22,9 @@ for i=1:playersLongSide
 end
 players{1}=[players{1}(1:nPlayers/2,:); -players{1}(1:nPlayers/2,:)];
    
-%Fixing angles, velocities=0 in the begining
-players{2}(nPlayers/2+1:end,2)=pi;
+%Fixing angles, velocities=1 in the begining
+players{2}(nPlayers/2+1:end,2) = pi;
+players{2}(1:end,1) = 1;
 
 %attributes
 players{3}=attributes;
