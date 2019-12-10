@@ -8,8 +8,9 @@ clc
 
 nPlayers = 18;
 field = [120 90];
-attributes = [0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 ...
-           ]';
+attributes = [0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1; ...
+    -50 -50 -50 0 0 0 50 50 50 -50 -50 -50 0 0 0 50 50 50; ...
+    -35 0 35 -35 0 35 -35 0 35 -35 0 35 -35 0 35 -35 0 35]';
 
 players = InitializePlayers(nPlayers, field, attributes);
 startPosition = [0;0];

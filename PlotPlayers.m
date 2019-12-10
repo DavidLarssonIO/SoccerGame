@@ -5,7 +5,7 @@ pos = players{1};
 radie = 1;
 
 hold on
-team = players{3};
+team = players{3}(:,1);
 team1 = find(team == 0);
 team2 = find(team == 1);
 
