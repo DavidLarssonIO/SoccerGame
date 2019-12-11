@@ -5,6 +5,10 @@ clf
 clc
 
 % Initialzing values
+% videoname = 'Fotboll';
+% vidobj = VideoWriter(videoname, 'Motion JPEG AVI');
+% vidobj.FrameRate = 1;
+% open(vidobj)
 
 nPlayers = 22;
 field = [120 90];
@@ -12,8 +16,8 @@ attributes = Attributes();
 
 players = InitializePlayers(nPlayers, field, attributes);
 startPosition = [0;0];
-startVel = [1;heaviside(randn)*-pi];
-startAcc = [0;0];
+startVel = [1; randn*pi/2];
+startAcc = [0; 0];
 
 ball = InitializeBall(startPosition, startVel, startAcc);
 
@@ -37,8 +41,13 @@ for time = 1:timeSteps/timeDelta
         players = InitializePlayers(nPlayers, field, attributes);
         ball = InitializeBall(startPosition, startVel, startAcc);
     end
-        
+    
+%     for i = 1:1
+%         frame = getframe(gcf);
+%         writeVideo(vidobj, frame)
+%     end
 end
 clf
 PlotConField(field)
 PlotPlayers(players)
+% close(vidobj)
