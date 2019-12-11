@@ -29,7 +29,7 @@ timeSync = 0.02;
 
 % Whit these settings one simulation will take 54 seconds
 time=0;
-pause(10);
+pause(0);
 
 for timeE = 1:timeSteps/timeDelta
     isGoal=false;

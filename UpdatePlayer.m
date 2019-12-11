@@ -57,7 +57,7 @@ if distanceToBall < actionBallDistance
         targetPosition = goalPosition;
         ball = KickBall(ball, kickBallSigma, shootBallCoefficient, kickBallAcceleration, targetPosition, timeDelta);
     elseif whatTodo <= passLikeRange
-        targetPosition = ChoosePlayerToPass(players,indexOfPlayer)        
+        targetPosition = ChoosePlayerToPass(players,indexOfPlayer);       
         ball = PassBall(ball, passBallSigma, passBallCoefficient, passBallAcceleration, targetPosition, timeDelta);
     else
         targetPosition = [goalPosition(1) players{1}(indexOfPlayer,2)];
