@@ -5,10 +5,10 @@ clf
 clc
 
 % Initialzing values
-% videoname = 'Fotboll';
-% vidobj = VideoWriter(videoname, 'Motion JPEG AVI');
-% vidobj.FrameRate = 1;
-% open(vidobj)
+videoname = 'Fotboll';
+vidobj = VideoWriter(videoname);
+vidobj.FrameRate = 5;
+open(vidobj)
 
 nPlayers = 22;
 field = [120 90];
@@ -16,17 +16,17 @@ attributes = Attributes();
 
 players = InitializePlayers(nPlayers, field, attributes);
 startPosition = [0;0];
-startVel = [1; randn*pi/2];
+startVel = [2; heaviside(randn)*pi];
 startAcc = [0; 0];
 
 ball = InitializeBall(startPosition, startVel, startAcc);
 
 % Timesteps of the simulation in seconds
-timeSteps = 1000;
+timeSteps = 500;
 % The gametime elapsed between every update
 timeDelta = 1;
 % Time between drawing of each plot
-timeSync = 0.05;
+timeSync = 0.01;
 
 % Whit these settings one simulation will take 54 seconds
 
@@ -42,12 +42,10 @@ for time = 1:timeSteps/timeDelta
         ball = InitializeBall(startPosition, startVel, startAcc);
     end
     
-%     for i = 1:1
-%         frame = getframe(gcf);
-%         writeVideo(vidobj, frame)
-%     end
+        frame = getframe(gcf);
+        writeVideo(vidobj, frame)
 end
 clf
 PlotConField(field)
 PlotPlayers(players)
-% close(vidobj)
+close(vidobj)

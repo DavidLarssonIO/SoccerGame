@@ -24,7 +24,8 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
     [~,Bsort] = sort(teamDistanceToBall); %Get the order
     teamBallIndex = teamIndex(Bsort);
 
-    teamDistanceToGoal = vecnorm(teamPositions - goalPosition, 2, 2);
+    goalVector = (teamPositions - goalPosition).*[1.5 1];
+    teamDistanceToGoal = vecnorm(goalVector, 2, 2);
     [~,Gsort] = sort(teamDistanceToGoal); %Get the order
     teamGoalIndex = teamIndex(Gsort);
     closenessToGoal = find(teamGoalIndex == indexOfPlayer);
@@ -32,23 +33,43 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
     goalKeeper = players{3}(indexOfPlayer,2);
     basePosition = [players{3}(indexOfPlayer,3) players{3}(indexOfPlayer,4)];
     
-    if (ismember(indexOfPlayer, teamBallIndex(1:3)))
-        teamBallIndex(1:3);
-        moveTarget = ballPosition;
-    else
-        moveTarget = basePosition;
-    end
+
     
+    if (goalKeeper == 0)
+        if (ismember(indexOfPlayer, teamBallIndex(1:2)))
+            moveTarget = ballPosition;
+        elseif (norm(ballPosition - playerPosition) < 25)
+            moveTarget = ballPosition;
+        else
+            moveTarget = basePosition;
+        end
+    elseif (team == 0)
+        if (ball(1,1) < -44 && abs(ball(1,2)) < 25)
+            moveTarget = ballPosition;
+        else
+            moveTarget = basePosition;
+        end
+    elseif (team == 1)
+        if (ball(1,1) > 44 && abs(ball(1,2)) < 25)
+            moveTarget = ballPosition;
+        else
+            moveTarget = basePosition;
+        end
+    end
     
     [newPlayerPosition, newPlayerAngle] = ...
         MovePlayer(playerPosition, moveTarget, playerVelocity, timeDelta);
     if (norm(newPlayerPosition - ball(1,:)) <= 1.01)
-        if (closenessToGoal < 4)
+        if (closenessToGoal < 3)
             updatedBall = KickBall(newPlayerPosition, goalPosition, ball);
+            global lastTeamOnBall;
+            lastTeamOnBall = team;
         else
             forwardPassIndex = teamGoalIndex(closenessToGoal - randi(2));
             forwardPassPosition = allPlayerPositions(forwardPassIndex,:);
             updatedBall = KickBall(newPlayerPosition, forwardPassPosition, ball);
+            global lastTeamOnBall;
+            lastTeamOnBall = team;
         end
     else
         updatedBall = ball;

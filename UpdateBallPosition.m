@@ -14,7 +14,7 @@ function updatedBall = UpdateBallPosition(ball, timeDelta)
 
     xyPosition = ball(1,:);
     updatedBall(1,:) = xyPosition + xyVelocity*timeDelta;
-    updatedBall(2,1) = updatedBall(2,1)*0.95;
+    updatedBall(2,1) = updatedBall(2,1)*0.90;
     updatedBall(3,:) = [0 0];
 
 end

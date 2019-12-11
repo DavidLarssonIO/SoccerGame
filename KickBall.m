@@ -2,19 +2,18 @@ function updatedBall = KickBall(playerPosition, target, ball)
 
     targetVector = (target - playerPosition);
     distance = norm(targetVector);
-    inaccuracy = (distance + ball(2,1))/10;
+    inaccuracy = (distance + ball(2,1))/25;
     xError = normrnd(0, inaccuracy);
     yError = normrnd(0, inaccuracy);
     targetVector = targetVector + [xError yError];
     unitTargetVector = targetVector/norm(targetVector);
-    ballAcceleration = ball(3,1) * [cos(ball(3,2)) cos(ball(3,2))];
-    kickForce = 5;
-    newAcceleration = ballAcceleration + unitTargetVector * kickForce;
+    [xBall,yBall] = pol2cart(ball(3,2), ball(3,1));
 
-    accelerationAngle = atan2(newAcceleration(2), newAcceleration(1));
-    accelerationMagnitude = norm(newAcceleration);
+    kickForce = 4;
+    xBall = xBall + unitTargetVector(1)*kickForce;
+    yBall = yBall + unitTargetVector(2)*kickForce;
+    
     updatedBall = ball;
-    updatedBall(3,1) = accelerationMagnitude;
-    updatedBall(3,2) = accelerationAngle;
+    [updatedBall(3,2), updatedBall(3,1)] = cart2pol(xBall, yBall);
 
 end
