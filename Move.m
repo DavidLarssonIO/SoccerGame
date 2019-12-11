@@ -10,17 +10,17 @@ actionPlayerDistance = 25;
 
 d=2;
 
-%     playerOriginalPosition=[-40-d -30; -40-d 0; -40-d 30; 0-d -30; 0-d 0; 0-d 30; 40-d -30; 40-d 0; 40-d 30;...
-%         40+d 30; 40+d 0; 40+d -30; 0+d 30; 0+d 0; 0+d -30; -40+d 30; -40+d 0; -40+d -30];
-playerOriginalPosition=[-40-d -30; -40-d 0; -40-d 30; 0-d -30; 0-d 0; 0-d 30; 40-d -30; 40-d 0; 40-d 30;...
-    160 1; 160 11; 160 21; 160 26; 160 -31; 160 36; 160 41; 160 51;160 -33];
+    playerOriginalPosition=[-40-d -30; -40-d 0; -40-d 30; 0-d -30; 0-d 0; 0-d 30; 40-d -30; 40-d 0; 40-d 30;...
+        40+d 30; 40+d 0; 40+d -30; 0+d 30; 0+d 0; 0+d -30; -40+d 30; -40+d 0; -40+d -30];
+% playerOriginalPosition=[-40-d -30; -40-d 0; -40-d 30; 0-d -30; 0-d 0; 0-d 30; 40-d -30; 40-d 0; 40-d 30;...
+%     160 1; 160 11; 160 21; 160 26; 160 -31; 160 36; 160 41; 160 51;160 -33];
 
 playerPosition = players{1}(indexOfPlayer,:);
 playerVelocity = players{2}(indexOfPlayer,:);
 ballPosition = ball(1,:);
 distanceToBall = norm(ballPosition-playerPosition);
 distanceToOriginalPosition = norm(playerOriginalPosition(indexOfPlayer,:)-playerPosition);
-if (distanceToBall<actionPlayerDistance && distanceToOriginalPosition < 1.5*actionPlayerDistance)
+if (distanceToBall<actionPlayerDistance && distanceToOriginalPosition < 1.0*actionPlayerDistance)
     playerDirection = atan2(ballPosition(2) - playerPosition(2),ballPosition(1) - playerPosition(1));
 else
     playerDirection = atan2(playerOriginalPosition(indexOfPlayer,2)- playerPosition(2),playerOriginalPosition(indexOfPlayer,1)- playerPosition(1));

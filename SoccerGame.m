@@ -28,18 +28,24 @@ timeDelta = 1;
 timeSync = 0.02;
 
 % Whit these settings one simulation will take 54 seconds
+time=0;
+pause(10);
 
-for time = 1:timeSteps/timeDelta
+for timeE = 1:timeSteps/timeDelta
     isGoal=false;
     ball = InitializeBall(startPositionBall, startVelBall, startAccBall);
     players = InitializePlayers(nPlayers, field, attributes);
-    pause(0);
+    pause(1);
     while isGoal==false
         [players, ball] = Update(players, ball, timeSync, timeDelta);
         PlotConField(field)
         PlotPlayers(players)
         PlotBall(ball)
         [isGoal,goalsTeam1,goalsTeam2] = Goal(ball,goalsTeam1,goalsTeam2);
+        txt = {[sprintf('%02d',fix(time/60)) ':' sprintf('%02d',mod(time,60))],...
+            [num2str(goalsTeam1) '-' num2str(goalsTeam2)]};
+        text(0,48,txt,'HorizontalAlignment','center')
+        time=time+1;
     end
 end
 clf
