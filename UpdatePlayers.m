@@ -11,7 +11,7 @@ function [updatedPlayers, updatedBall] = UpdatePlayers(players, ball, timeDelta)
         updatedPlayers{2}(indexOfPlayer,:) = updatedPlayer{2};
         updatedPlayers{3}(indexOfPlayer,:) = updatedPlayer{3};
     end
-    
+    updatedPlayers = RepelPlayers(updatedPlayers);
     updatedBall = ball;
     
 end

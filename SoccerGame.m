@@ -23,7 +23,7 @@ timeSteps = 1000;
 % The gametime elapsed between every update
 timeDelta = 1;
 % Time between drawing of each plot
-timeSync = 0.1;
+timeSync = 0.05;
 
 % Whit these settings one simulation will take 54 seconds
 
