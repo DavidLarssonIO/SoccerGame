@@ -34,7 +34,9 @@ for time = 1:timeSteps/timeDelta
     [players, ball] = Update(players, ball, timeSync, timeDelta);
     PlotConField(field)
     PlotPlayers(players)
+    PlotBall(ball)
+    hold on
 end
-clf
-PlotConField(field)
-PlotPlayers(players)
+%clf
+%PlotConField(field)
+%PlotPlayers(players)
