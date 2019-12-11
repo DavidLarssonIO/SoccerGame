@@ -5,6 +5,6 @@ function [players, ball] = Update(players, ball, timeSync, timeDelta)
     players = updatedPlayers;
     ball = UpdateBallPosition(updatedBall, timeDelta);
     pause(timeSync);
-
+        
 end
 

@@ -1,8 +1,8 @@
 function [players] = InitializePlayers(nPlayers,fieldSize,attributes)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
-playersShortSide=nPlayers/6;
-playersLongSide=nPlayers/6;
+playersShortSide=18/6;
+playersLongSide=18/6;
 fieldLength=fieldSize(1);
 fieldWidth=fieldSize(2);
 nAttributes=size(attributes,2);
@@ -21,14 +21,17 @@ for i=1:playersLongSide
     end
 end
 players{1}=[players{1}(1:nPlayers/2,:); -players{1}(1:nPlayers/2,:)];
-   
+players{1}(10,:) = [-1.5 0];
+players{1}(11,:) = [-60 0];
+players{1}(21,:) = [1.5 0];
+players{1}(22,:) = [60 0];
+
 %Fixing angles, velocities=1 in the begining
 players{2}(nPlayers/2+1:end,2) = pi;
 players{2}(1:end,1) = 1;
 
 %attributes
-players{3}=attributes;
-        
+players{3} = attributes;
 
 end
 
