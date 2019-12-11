@@ -33,7 +33,7 @@ for time = 1:timeSteps/timeDelta
     isGoal=false;
     ball = InitializeBall(startPositionBall, startVelBall, startAccBall);
     players = InitializePlayers(nPlayers, field, attributes);
-    pause(2);
+    pause(0);
     while isGoal==false
         [players, ball] = Update(players, ball, timeSync, timeDelta);
         PlotConField(field)

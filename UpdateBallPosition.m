@@ -4,7 +4,7 @@ function [updatedBall] = UpdateBallPosition(ball, timeDelta, acceleration)
 fieldLength=120;
 fieldWidth=90;
 bounceCoefficient=0.2;
-frictionCoefficient=0.99; %less than 1
+frictionCoefficient=0.85; %less than 1
 
 updatedBall=ball;
 

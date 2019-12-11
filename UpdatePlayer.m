@@ -22,17 +22,17 @@ end
 % Dynamic parameter values
 % TODO: Make sure to set these parameters according to the definition of
 % the size of the feild.
-actionBallDistance = 0.04*fieldWidth;
+actionBallDistance = 2;
 
 % This distance is equal to 10% of the field size
 % TODO: Make sure to set these parameters according to the definition of
 % the size of the feild.
-actionPlayerDistance = 0.4*fieldWidth;
+actionPlayerDistance = 36;
 
 % This distance is equal to 5% of the field size
 % TODO: Make sure to set these parameters according to the definition of
 % the size of the feild.
-actionGoalDistance = 0.2*fieldWidth;
+actionGoalDistance = 18;
 
 kickBallLikelihood = 1.0;
 passBallLikelihood = 0.0;
@@ -47,10 +47,12 @@ end
 
 % TODO: Figure out good values for these parameters
 kickBallSigma = 1/4;
-passBallSigma = 1;
+passBallSigma = 1/20;
 
 kickBallAcceleration = 1; 
 passBallAcceleration = 1;
+shootBallCoefficient=5;
+passBallCoefficient=5;
 
 % Calc distance to ball
 % TODO make sure that x,y formating is correct
@@ -59,6 +61,7 @@ ballPosition = ball(1,:);
 distanceToBall = sqrt((ballPosition(1) - playerPosition(1))^2 + (ballPosition(2) - playerPosition(2))^2);
 
 % Calc distance to other players
+
 d = pdist(players{1});
 z = squareform(d);
 
@@ -69,6 +72,7 @@ elseif playerTeam==1
     distanceToTeamMates = z(indexOfPlayer,nPlayers/2+1:nPlayers);
     distanceToOpponents = z(indexOfPlayer,1:nPlayers/2);
 end
+
     
 % Calc distance to goal
 % TODO: Add functionallity for other teams goal as well
@@ -84,11 +88,11 @@ if distanceToBall < actionBallDistance
     
     if whatTodo <= kickLikeRange
         targetPosition = goalPosition;
-        ball = KickBall(ball, kickBallSigma, kickBallAcceleration, targetPosition, timeDelta);
+        ball = KickBall(ball, kickBallSigma, shootBallCoefficient, kickBallAcceleration, targetPosition, timeDelta);
     elseif whatTodo <= passLikeRange
         [~,index] = min(distanceToTeamMates.*distanceToTeamMates>0);
         targetPosition=players{1}(index+playerTeam*nPlayers/2,:);
-        ball = PassBall(ball, passBallSigma, passBallAcceleration, targetPosition, timeDelta);
+        ball = KickBall(ball, passBallSigma, passBallCoefficient, passBallAcceleration, targetPosition, timeDelta);
     end
 end
 
@@ -102,9 +106,8 @@ end
 % different PlayerAction.m files make sure to put all your helpfiles inside
 % this function. 
 
-function [updatedBall] = KickBall(ball, kickBallSigma, kickBallAcceleration, targetPosition, timeDelta)
+function [updatedBall] = KickBall(ball, kickBallSigma, kickBallCoefficient, kickBallAcceleration, targetPosition, timeDelta)
     
-    kickBallCoefficient=5;
     ballPosition = ball(1,:);
     updatedBall = ball;
     
@@ -138,9 +141,13 @@ function [updatedPlayer] = Move(players, indexOfPlayer, ball, timeDelta)
     fieldWidth=90;
     actionPlayerDistance = 25;
     
-    playerOriginalPosition=[-40 -30; -40 0; -40 30; 0 -30; 0 0; 0 30; 40 -30; 40 0; 40 30;...
-        40 30; 40 0; 40 -30; 0 30; 0 0; 0 -30; -40 30; -40 0; -40 -30];
+    d=2;
     
+    playerOriginalPosition=[-40-d -30; -40-d 0; -40-d 30; 0-d -30; 0-d 0; 0-d 30; 40-d -30; 40-d 0; 40-d 30;...
+        40+d 30; 40+d 0; 40+d -30; 0+d 30; 0+d 0; 0+d -30; -40+d 30; -40+d 0; -40+d -30];
+% playerOriginalPosition=[-40-d -30; -40-d 0; -40-d 30; 0-d -30; 0-d 0; 0-d 30; 40-d -30; 40-d 0; 40-d 30;...
+%         1+d 1; 2+d 2; 22+d 0; 27+d 0; 3+d 0; 43 0; -10 0; 10 0; 15+d 0];    
+
     playerPosition = players{1}(indexOfPlayer,:);
     playerVelocity = players{2}(indexOfPlayer,:);
     ballPosition = ball(1,:);
