@@ -24,10 +24,10 @@ elseif updatedBall(1,1) < -fieldLength/2 && (ball(1,2)<-7.32 || ball(1,2)>7.32)
     updatedBall(2,1)=-bounceCoefficient*updatedBall(2,1);
     updatedBall(2,2)=bounceCoefficient*updatedBall(2,2);
 elseif updatedBall(1,1) > fieldLength/2 %goal
-    updatedBall(1,1)=fieldLength/2+5;
+    updatedBall(1,1)=fieldLength/2+2;
     updatedBall(2,:)=[1 0];
 elseif updatedBall(1,1) < -fieldLength/2 %goal
-    updatedBall(1,1)=-fieldLength/2-5;
+    updatedBall(1,1)=-fieldLength/2-2;
     updatedBall(2,:)=[-1 0];
 end
 

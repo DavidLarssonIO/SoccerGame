@@ -2,6 +2,7 @@ function [updatedPlayers, updatedBall] = UpdatePlayers(players, ball, timeDelta)
 %This function updates the state of all the players and the ball
 
 acceleration=0.1;
+particleRadius=1;
 nAttributes = size(players{3},2);
 nPlayers = size(players{1},1);
 % TODO, make sure the row/column formating is correct here
@@ -17,6 +18,7 @@ for indexOfPlayer = 1:nPlayers
 end
 % TODO: Add ballAction function here since it only should update once
 updatedBall = UpdateBallPosition(ball, timeDelta, acceleration);
-
+[updatedPlayers{1}(:,1),updatedPlayers{1}(:,2)]=...
+    Collisions(updatedPlayers{1}(:,1),updatedPlayers{1}(:,2),particleRadius); 
 
 end
