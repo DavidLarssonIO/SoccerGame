@@ -8,8 +8,7 @@ clc
 
 nPlayers = 22;
 field = [120 90];
-attributes = [0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1; ...
-              0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1]';
+attributes = Attributes();
 
 players = InitializePlayers(nPlayers, field, attributes);
 startPosition = [0;0];
@@ -32,7 +31,7 @@ for time = 1:timeSteps/timeDelta
     [players, ball] = Update(players, ball, timeSync, timeDelta);
     PlotConField(field)
     PlotPlayers(players)
-    scatter(ball(1,1),ball(1,2),18,'k','filled')
+    PlotBall(ball)
     [ball, players, goal] = CheckBorders(ball, players);
     if (goal == 1)
         players = InitializePlayers(nPlayers, field, attributes);
