@@ -6,6 +6,4 @@ clc;
 % d = pdist(X)
 % z=squareform(d)
 
-sign(2)
-sign(-5)
-sign(0)
+5<6

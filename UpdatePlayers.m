@@ -18,4 +18,5 @@ end
 % TODO: Add ballAction function here since it only should update once
 updatedBall = UpdateBallPosition(ball, timeDelta, acceleration);
 
+
 end

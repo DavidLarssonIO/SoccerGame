@@ -109,8 +109,8 @@ function [updatedBall] = KickBall(ball, kickBallSigma, kickBallAcceleration, tar
     updatedBall = ball;
     
     kickDirection = (targetPosition - ballPosition)/norm(targetPosition - ballPosition);
-    kickDirection(1) = kickDirection(1) * normrnd(1, kickBallSigma);
-    kickDirection(2) = kickDirection(2) * normrnd(1, kickBallSigma);
+    kickDirection(1) = kickDirection(1) + normrnd(0, kickBallSigma);
+    kickDirection(2) = kickDirection(2) + normrnd(0, kickBallSigma);
 
     
     updatedBall(2,:)= updatedBall(2,:)+kickBallCoefficient*kickDirection;
@@ -136,10 +136,10 @@ function [updatedPlayer] = Move(players, indexOfPlayer, ball, timeDelta)
     % The velocity is set by the norm of the initial values in the xVel and
     % yVel in the player matrix.
     fieldWidth=90;
-    actionPlayerDistance = 0.2*fieldWidth;
+    actionPlayerDistance = 25;
     
-    playerOriginalPosition=[-30 -30; -30 0; -30 30; 0 -30; 0 0; 0 30; 30 -30; 30 0; 30 30;...
-        30 30; 30 0; 30 -30; 0 30; 0 0; 0 -30; -30 30; -30 0; -30 -30];
+    playerOriginalPosition=[-40 -30; -40 0; -40 30; 0 -30; 0 0; 0 30; 40 -30; 40 0; 40 30;...
+        40 30; 40 0; 40 -30; 0 30; 0 0; 0 -30; -40 30; -40 0; -40 -30];
     
     playerPosition = players{1}(indexOfPlayer,:);
     playerVelocity = players{2}(indexOfPlayer,:);
