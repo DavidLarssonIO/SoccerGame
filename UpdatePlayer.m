@@ -42,7 +42,7 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
     updatedPlayer{2} = [playerVelocity newPlayerAngle];
     updatedPlayer{3} = players{3}(indexOfPlayer,:);
 
-    if (norm(newPlayerPosition - ball(1,:)) < 1)
+    if (norm(newPlayerPosition - ball(1,:)) <= 1.01)
         updatedBall = KickBall(newPlayerPosition, goalPosition, ball);
     else
         updatedBall = ball;
