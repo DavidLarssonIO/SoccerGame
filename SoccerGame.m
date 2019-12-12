@@ -9,6 +9,7 @@ clc
 nPlayers = 18;
 field = [120 90];
 attributes = [0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1]';
+kickoffTeam=0;
 
 %players = InitializePlayers(nPlayers, field, attributes);
 startPositionBall = [0;0];
@@ -34,14 +35,14 @@ pause(0);
 for timeE = 1:timeSteps/timeDelta
     isGoal=false;
     ball = InitializeBall(startPositionBall, startVelBall, startAccBall);
-    players = InitializePlayers(nPlayers, field, attributes);
+    players = InitializePlayers(nPlayers, field, attributes,kickoffTeam);
     pause(1);
     while isGoal==false
         [players, ball] = Update(players, ball, timeSync, timeDelta);
         PlotConField(field)
         PlotPlayers(players)
         PlotBall(ball)
-        [isGoal,goalsTeam1,goalsTeam2] = Goal(ball,goalsTeam1,goalsTeam2);
+        [isGoal,goalsTeam1,goalsTeam2,kickoffTeam] = Goal(ball,goalsTeam1,goalsTeam2);
         txt = {[sprintf('%02d',fix(time/60)) ':' sprintf('%02d',mod(time,60))],...
             [num2str(goalsTeam1) '-' num2str(goalsTeam2)]};
         text(0,48,txt,'HorizontalAlignment','center')

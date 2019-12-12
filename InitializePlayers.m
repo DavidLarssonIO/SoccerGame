@@ -1,4 +1,4 @@
-function [players] = InitializePlayers(nPlayers,fieldSize,attributes)
+function [players] = InitializePlayers(nPlayers,fieldSize,attributes,kickoffTeam)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 playersShortSide=nPlayers/6;
@@ -21,7 +21,12 @@ for i=1:playersLongSide
     end
 end
 players{1}=[players{1}(1:nPlayers/2,:); -players{1}(1:nPlayers/2,:)];
-   
+if kickoffTeam==0
+    players{1}(8,:)=[-2 0]; %mid striker has index 8
+elseif kickoffTeam==1
+    players{1}(nPlayers/2+8,:)=[2 0];
+end
+
 %Fixing angles, velocities=1 in the begining
 players{2}(nPlayers/2+1:end,2)=pi;
 players{2}(:,1)=1;
