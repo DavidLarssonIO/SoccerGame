@@ -10,9 +10,6 @@ updatedPlayer = {[0 0],[1 0],players{3}};
 %nPlayers=size(players{1},1);
 playerTeam=players{3}(indexOfPlayer);
 
-% Static paramter values
-% TODO: Make sure to set these parameters according to the definition of
-% the size of the feild.
 if playerTeam==0
     goalPosition = [60 0];
 else
@@ -44,7 +41,6 @@ moveForwardCoefficient=0.8;
 playerPosition = players{1}(indexOfPlayer,:);
 ballPosition = ball(1,:);
 distanceToBall = sqrt((ballPosition(1) - playerPosition(1))^2 + (ballPosition(2) - playerPosition(2))^2);
-
 distanceToGoal = sqrt((goalPosition(1) - playerPosition(1)).^2 + (goalPosition(2) - playerPosition(2)).^2);
 
 if distanceToBall < actionBallDistance

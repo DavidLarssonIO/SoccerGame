@@ -1,6 +1,7 @@
 function [players] = InitializePlayers(nPlayers,fieldSize,attributes,kickoffTeam)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
+epsillon=1/10;
 playersShortSide=nPlayers/6;
 playersLongSide=nPlayers/6;
 fieldLength=fieldSize(1);
@@ -17,7 +18,7 @@ yPositions=linspace(-fieldWidth/2,fieldWidth/2,playersShortSide+2);
 for i=1:playersLongSide
     for j=1:playersShortSide
         players{1}((i-1)*playersShortSide+j,1)=xPositions(i+1);
-        players{1}((i-1)*playersShortSide+j,2)=yPositions(j+1); %y-position
+        players{1}((i-1)*playersShortSide+j,2)=yPositions(j+1)+epsillon; %y-position
     end
 end
 players{1}=[players{1}(1:nPlayers/2,:); -players{1}(1:nPlayers/2,:)];
