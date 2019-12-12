@@ -4,10 +4,10 @@ clear all
 clf
 clc
 
-videoname = 'LowNoice';
-vidobj = VideoWriter(videoname, 'Motion JPEG AVI');
-vidobj.FrameRate = 5;
-open(vidobj)
+% videoname = 'LowNoice';
+% vidobj = VideoWriter(videoname, 'Motion JPEG AVI');
+% vidobj.FrameRate = 5;
+% open(vidobj)
 
 % Initialzing values
 nPlayers = 22;
@@ -40,11 +40,11 @@ for time = 1:timeSteps/timeDelta
         ball = InitializeBall(startPosition, startVel, startAcc);
     end
 
-    frame = getframe(gcf);
-    writeVideo(vidobj, frame)
+%     frame = getframe(gcf);
+%     writeVideo(vidobj, frame)
 
 end
 clf
 PlotConField(field)
 PlotPlayers(players)
-close(vidobj)
+% close(vidobj)

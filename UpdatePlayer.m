@@ -34,7 +34,7 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
 
     % Player is not the goalkeeper
     if (goalKeeper == 0)
-        if (ismember(indexOfPlayer, teamBallIndex(1:2)))
+        if (ismember(indexOfPlayer, teamBallIndex(1:3)))
             moveTarget = ballPosition;
         elseif (norm(ballPosition - playerPosition) < 15)
             moveTarget = ballPosition;
@@ -61,7 +61,7 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
     [newPlayerPosition, newPlayerAngle] = ...
         MovePlayer(playerPosition, moveTarget, playerVelocity, timeDelta);
     if (norm(newPlayerPosition - ball(1,:)) <= 1.01)
-        if (closenessToGoal < 3)
+        if (closenessToGoal < 12)
             updatedBall = KickBall(newPlayerPosition, goalPosition, ball, timeDelta);
             global lastTeamOnBall;
             lastTeamOnBall = team;

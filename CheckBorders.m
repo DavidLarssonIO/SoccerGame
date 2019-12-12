@@ -20,6 +20,7 @@ function [ball, players, goal] = CheckBorders(ball, players)
                 if (otherTeam == 0)
                     ball(1,2) = sign(ball(1,2)) * 45;
                 else
+                    ball(1,:) = [54.5,0];
                     for i = 1:22
                         if (players{3}(i,1) == lastTeamOnBall && players{1}(i,1) > 40)
                             players{1}(i,1) = 40;
@@ -32,6 +33,7 @@ function [ball, players, goal] = CheckBorders(ball, players)
                 if (otherTeam == 1)
                     ball(1,2) = sign(ball(1,2)) * 45;
                 else
+                    ball(1,:) = [-54.5,0];
                     for i = 1:22
                         if (players{3}(i,1) == lastTeamOnBall && players{1}(i,1) < -40)
                             players{1}(i,1) = -40;
