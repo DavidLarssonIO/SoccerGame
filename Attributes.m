@@ -8,12 +8,14 @@ xPositionsTeam2 = [45 45 45 0 5 0 -25 -25 -45 -45 60];
 yPositionsTeam2 = [-30 0 30 -30 0 30 25 -25 -20 20 0];
 xBasePosition = [xPositionsTeam1 xPositionsTeam2];
 yBasePosition = [yPositionsTeam1 yPositionsTeam2];
+speed = [1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1]*2;
               
 attributes = [team; ...
               isGoalKeeper; ...
               xBasePosition; ...
-              yBasePosition];
-
+              yBasePosition; ...
+              speed];
+          
 attributes = attributes';
 
 end

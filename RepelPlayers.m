@@ -7,11 +7,18 @@ function players = RepelPlayers(players)
             player2 = playerPositions(jPlayer,:);
             distance = norm(player1 - player2);
             if (distance < 1)
-                midpoint = (player1 + player2)/2;
-                 playerPositions(iPlayer,:) = playerPositions(iPlayer,:) - ...
-                     (midpoint - player1)/norm(midpoint - player1) * (1-distance)/2;
-                 playerPositions(jPlayer,:) = playerPositions(jPlayer,:) - ...
-                     (midpoint - player2)/norm(midpoint - player2) * (1-distance)/2;
+                 if distance == 0
+                     [x,y] = pol2cart(players{2}(iPlayer,2),players{2}(iPlayer,1));
+                     playerPositions(iPlayer,:) = playerPositions(iPlayer,:) - [x y]/2;
+                     [x,y] = pol2cart(players{2}(jPlayer,2),players{2}(jPlayer,1));
+                     playerPositions(jPlayer,:) = playerPositions(jPlayer,:) - [x y]/2;
+                 else
+                     midpoint = (player1 + player2)/2;
+                     playerPositions(iPlayer,:) = playerPositions(iPlayer,:) - ...
+                       (midpoint - player1)/norm(midpoint - player1) * (1-distance)/2;
+                     playerPositions(jPlayer,:) = playerPositions(jPlayer,:) - ...
+                       (midpoint - player2)/norm(midpoint - player2) * (1-distance)/2;
+                 end
             end
         end
     end

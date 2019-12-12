@@ -1,14 +1,11 @@
 function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlayer, timeDelta)
-    % Updates the player state and ball state by action rules
-    % This is the function we can replace with different variants for
-    % comparing different players 
 
     % Initializing stuff
-    updatedPlayer = {[0 0],[0 0],players{3}};
+    updatedPlayer = {[0 0],[0 0],players{3}(indexOfPlayer,:)};
     ballPosition = ball(1,:);
     allPlayerPositions = players{1};
     playerPosition = players{1}(indexOfPlayer,:);
-    playerVelocity = players{2}(indexOfPlayer,1);
+    playerVelocity = players{3}(indexOfPlayer,5);
     team = players{3}(indexOfPlayer,1);
     % indexing players after distance to ball and goal
     if team == 0
@@ -24,25 +21,29 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
     [~,Bsort] = sort(teamDistanceToBall); %Get the order
     teamBallIndex = teamIndex(Bsort);
 
-    goalVector = (teamPositions - goalPosition).*[1.5 1];
+    % The following prioritizes x/y
+    goalVector = (teamPositions - goalPosition).*[1 0.1];
     teamDistanceToGoal = vecnorm(goalVector, 2, 2);
     [~,Gsort] = sort(teamDistanceToGoal); %Get the order
     teamGoalIndex = teamIndex(Gsort);
     closenessToGoal = find(teamGoalIndex == indexOfPlayer);
     
+    % Goalkeeper and basepositions set in attributes
     goalKeeper = players{3}(indexOfPlayer,2);
     basePosition = [players{3}(indexOfPlayer,3) players{3}(indexOfPlayer,4)];
-    
 
-    
+    % Player is not the goalkeeper
     if (goalKeeper == 0)
         if (ismember(indexOfPlayer, teamBallIndex(1:2)))
             moveTarget = ballPosition;
-        elseif (norm(ballPosition - playerPosition) < 25)
+        elseif (norm(ballPosition - playerPosition) < 15)
+            moveTarget = ballPosition;
+        elseif (ReceiveBall(playerPosition, ball) < pi/6)
             moveTarget = ballPosition;
         else
             moveTarget = basePosition;
         end
+    % Player is goalkeeper
     elseif (team == 0)
         if (ball(1,1) < -44 && abs(ball(1,2)) < 25)
             moveTarget = ballPosition;
@@ -61,13 +62,13 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
         MovePlayer(playerPosition, moveTarget, playerVelocity, timeDelta);
     if (norm(newPlayerPosition - ball(1,:)) <= 1.01)
         if (closenessToGoal < 3)
-            updatedBall = KickBall(newPlayerPosition, goalPosition, ball);
+            updatedBall = KickBall(newPlayerPosition, goalPosition, ball, timeDelta);
             global lastTeamOnBall;
             lastTeamOnBall = team;
         else
             forwardPassIndex = teamGoalIndex(closenessToGoal - randi(2));
             forwardPassPosition = allPlayerPositions(forwardPassIndex,:);
-            updatedBall = KickBall(newPlayerPosition, forwardPassPosition, ball);
+            updatedBall = KickBall(newPlayerPosition, forwardPassPosition, ball, timeDelta);
             global lastTeamOnBall;
             lastTeamOnBall = team;
         end
@@ -77,6 +78,5 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
     
     updatedPlayer{1} = newPlayerPosition;
     updatedPlayer{2} = [playerVelocity newPlayerAngle];
-    updatedPlayer{3} = players{3}(indexOfPlayer,:);
 
 end
