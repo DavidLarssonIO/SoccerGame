@@ -2,7 +2,7 @@ function [ball, players, goal] = CheckBorders(ball, players)
     
     if (abs(ball(1,1))  > 60 || abs(ball(1,2))  > 45)
         if (abs(ball(1,2))  < 7.32)
-            pause(1)
+%             pause(1)
             if (ball(1,1) > 60)
                 goal = 1;
                 return
@@ -17,7 +17,7 @@ function [ball, players, goal] = CheckBorders(ball, players)
             distanceToBall = vecnorm(players{1}(teamIndex,:) - ball(1,:), 2, 2);
             [~, closestPlayer] = min(distanceToBall);
             closestPlayer = teamIndex(closestPlayer);
-            pause(1)
+%             pause(1)
             
             if (ball(1,1) > 60)
                 ball(1,1) = 60;

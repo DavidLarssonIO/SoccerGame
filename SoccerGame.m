@@ -12,9 +12,9 @@ attributes = Attributes();
 % players = InitializePlayers(nPlayers, field, attributes);
 
 ball = InitializeBall();
-players = InitializePlayers(nPlayers,[3 3 3], [3 3 3],field,attributes,randi([0 1]));
+players = InitializePlayers(nPlayers,[3 3 3], [2 4 3],field,attributes,randi([0 1]));
 % Timesteps of the simulation in seconds
-timeSteps = 100;
+timeSteps = 1000;
 % The gametime elapsed between every update
 timeDelta = 1;
 % Time between drawing of each plot

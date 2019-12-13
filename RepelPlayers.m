@@ -7,7 +7,7 @@ function players = RepelPlayers(players)
             player2 = playerPositions(jPlayer,:);
             distance = norm(player1 - player2);
             if (distance < 1)
-                 if distance == 0
+                 if (distance < 1e-12)
                      [x,y] = pol2cart(players{2}(iPlayer,2),players{2}(iPlayer,1));
                      playerPositions(iPlayer,:) = playerPositions(iPlayer,:) - [x y]/2;
                      [x,y] = pol2cart(players{2}(jPlayer,2),players{2}(jPlayer,1));
@@ -19,6 +19,12 @@ function players = RepelPlayers(players)
                      playerPositions(jPlayer,:) = playerPositions(jPlayer,:) - ...
                        (midpoint - player2)/norm(midpoint - player2) * (1-distance)/2;
                  end
+%                  if (isnan(playerPositions(iPlayer,1)) || isnan(playerPositions(jPlayer,1)))
+%                      playerPositions(iPlayer,:)
+%                      distance == 0
+%                      distance
+%                      norm(midpoint - player1)
+%                  end
             end
         end
     end
