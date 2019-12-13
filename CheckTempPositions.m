@@ -1,4 +1,4 @@
-function [teamBallIndex, teamGoalIndex, closenessToGoal] ...
+function [teamBallIndex, teamGoalIndex] ...
             = CheckTempPositions(players, ballPosition, indexOfPlayer, team, goalPosition)
 
     teamIndex = find(players{3}(:,1) == team);
@@ -14,6 +14,5 @@ function [teamBallIndex, teamGoalIndex, closenessToGoal] ...
     teamDistanceToGoal = vecnorm(goalVector, 2, 2);
     [~,Gsort] = sort(teamDistanceToGoal); %Get the order
     teamGoalIndex = teamIndex(Gsort);
-    closenessToGoal = find(teamGoalIndex == indexOfPlayer);
     
 end

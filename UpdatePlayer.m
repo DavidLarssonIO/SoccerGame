@@ -15,9 +15,10 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
         goalPosition = [-60 0];
     end
 
-    [teamBallIndex, teamGoalIndex, closenessToGoal] ...
+    [teamBallIndex, teamGoalIndex] ...
             = CheckTempPositions(players, ballPosition, indexOfPlayer, team, goalPosition);
     distanceToBall = norm(ballPosition - playerPosition);
+    closenessToGoal = find(teamGoalIndex == indexOfPlayer);
 
     % Goalkeeper and basepositions set in attributes
     goalKeeper = players{3}(indexOfPlayer,2);
