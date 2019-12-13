@@ -2,7 +2,7 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
 % Updates the player state and ball state by action rules
 % This is the function we can replace with different variants for
 % comparing different players
-
+global lastTeamOnBall;
 nAttributes = size(players{3},2);
 updatedPlayer = {[0 0],[1 0],players{3}};
 
@@ -16,9 +16,9 @@ else
     goalPosition = [-60 0];
 end
 
-actionBallDistance = 2;
+actionBallDistance = 1;
 actionPlayerDistance = 36;
-actionGoalDistance = 40;
+actionGoalDistance = 20;
 
 kickBallLikelihood = 0.0;
 passBallLikelihood = 0.5;
@@ -31,12 +31,13 @@ if sumOfLikelihoods ~= 1
 end
 
 kickBallSigma = 1/4;
-passBallSigma = 1/20;
+passBallSigma = 1/200;
 kickBallAcceleration = 1;
 passBallAcceleration = 1;
 shootBallCoefficient=8;
 passBallCoefficient=0.2;
-moveForwardCoefficient=0.8;
+moveForwardCoefficient=0.6;
+markedDistance=8;
 
 playerPosition = players{1}(indexOfPlayer,:);
 ballPosition = ball(1,:);
@@ -44,23 +45,24 @@ distanceToBall = sqrt((ballPosition(1) - playerPosition(1))^2 + (ballPosition(2)
 distanceToGoal = sqrt((goalPosition(1) - playerPosition(1)).^2 + (goalPosition(2) - playerPosition(2)).^2);
 
 if distanceToBall < actionBallDistance
+    lastTeamOnBall=playerTeam;
+    kickBallLikelihood=exp(-distanceToGoal/10);
     
     whatTodo = rand();
     kickLikeRange = kickBallLikelihood;
     passLikeRange = kickBallLikelihood + passBallLikelihood;
     
-    if distanceToGoal < actionGoalDistance %&& whatTodo <= kickLikeRange
+    if  whatTodo <= kickLikeRange || distanceToGoal < actionGoalDistance
         targetPosition = goalPosition;
         ball = KickBall(ball, kickBallSigma, shootBallCoefficient, kickBallAcceleration, targetPosition, timeDelta);
-    elseif whatTodo <= passLikeRange
+    elseif IsMarked(players,indexOfPlayer,playerTeam,markedDistance)
         targetPosition = ChoosePlayerToPass(players,indexOfPlayer);       
         ball = PassBall(ball, passBallSigma, passBallCoefficient, passBallAcceleration, targetPosition, timeDelta);
-    else
+    else % I am not marked and can go forward with the ball
         targetPosition = [goalPosition(1) players{1}(indexOfPlayer,2)];
         ball = KickBall(ball, kickBallSigma, moveForwardCoefficient, kickBallAcceleration, targetPosition, timeDelta); 
     end
 end
-
 
 updatedBall = ball;
 updatedPlayer = Move(players, indexOfPlayer, updatedBall, timeDelta);

@@ -42,6 +42,7 @@ for timeE = 1:timeSteps/timeDelta
         PlotConField(field)
         PlotPlayers(players)
         PlotBall(ball)
+        [ball, players, goal] = CheckBorders(ball, players); %vi skiter i goal här
         [isGoal,goalsTeam1,goalsTeam2,kickoffTeam] = Goal(ball,goalsTeam1,goalsTeam2);
         txt = {[sprintf('%02d',fix(time/60)) ':' sprintf('%02d',mod(time,60))],...
             [num2str(goalsTeam1) '-' num2str(goalsTeam2)]};
