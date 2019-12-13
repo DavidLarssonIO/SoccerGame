@@ -20,9 +20,10 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
     teamDistanceToBall = vecnorm(teamPositions - ballPosition, 2, 2);
     [~,Bsort] = sort(teamDistanceToBall); %Get the order
     teamBallIndex = teamIndex(Bsort);
+    distanceToBall = norm(ballPosition - playerPosition);
 
     % The following prioritizes x/y
-    goalVector = (teamPositions - goalPosition).*[1 0.1];
+    goalVector = (teamPositions - goalPosition).*[1 1];
     teamDistanceToGoal = vecnorm(goalVector, 2, 2);
     [~,Gsort] = sort(teamDistanceToGoal); %Get the order
     teamGoalIndex = teamIndex(Gsort);
@@ -38,7 +39,7 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
             moveTarget = ballPosition;
         elseif (norm(ballPosition - playerPosition) < 15)
             moveTarget = ballPosition;
-        elseif (ReceiveBall(playerPosition, ball) < pi/6)
+        elseif (ReceiveBall(playerPosition, ball) < pi/6 && distanceToBall < 50)
             moveTarget = ballPosition;
         else
             moveTarget = basePosition;
@@ -47,11 +48,15 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
     elseif (team == 0)
         if (ball(1,1) < -44 && abs(ball(1,2)) < 25)
             moveTarget = ballPosition;
+        elseif (ReceiveBall(playerPosition, ball) < pi/4 && distanceToBall < 40)
+            moveTarget = ballPosition;
         else
             moveTarget = basePosition;
         end
     elseif (team == 1)
         if (ball(1,1) > 44 && abs(ball(1,2)) < 25)
+            moveTarget = ballPosition;
+        elseif (ReceiveBall(playerPosition, ball) < pi/4 && distanceToBall < 40)
             moveTarget = ballPosition;
         else
             moveTarget = basePosition;
@@ -61,7 +66,7 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
     [newPlayerPosition, newPlayerAngle] = ...
         MovePlayer(playerPosition, moveTarget, playerVelocity, timeDelta);
     if (norm(newPlayerPosition - ball(1,:)) <= 1.01)
-        if (closenessToGoal < 12)
+        if (closenessToGoal < 4)
             updatedBall = KickBall(newPlayerPosition, goalPosition, ball, timeDelta);
             global lastTeamOnBall;
             lastTeamOnBall = team;

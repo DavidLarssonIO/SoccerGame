@@ -1,5 +1,4 @@
-function [teamDistanceToBall, teamBallIndex, teamDistanceToGoal, teamGoalIndex] ... 
-         = CheckTeamPositions(players, ball, team)
+function [teamBallIndex, teamGoalIndex] = CheckTeamPositions(players, ball, team)
 
     allPlayerPositions = players{1};
     teamIndex = find(players{3}(:,1) == team);

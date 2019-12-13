@@ -10,7 +10,7 @@ clc
 % open(vidobj)
 
 % Initialzing values
-nPlayers = 22;
+nPlayers = 20;
 field = [120 90];
 attributes = Attributes();
 
@@ -25,7 +25,7 @@ ball = InitializeBall(startPosition, startVel, startAcc);
 % Timesteps of the simulation in seconds
 timeSteps = 1000;
 % The gametime elapsed between every update
-timeDelta = 0.5;
+timeDelta = 1;
 % Time between drawing of each plot
 timeSync = 0.001*timeDelta;
 
