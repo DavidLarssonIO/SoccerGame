@@ -6,9 +6,9 @@ clc
 
 % Initialzing values
 
-nPlayers = 18;
+nPlayers = 20;
 field = [120 90];
-attributes = [0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1]';
+attributes = [0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1]';
 kickoffTeam=0;
 
 %players = InitializePlayers(nPlayers, field, attributes);

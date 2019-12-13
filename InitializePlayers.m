@@ -2,8 +2,8 @@ function [players] = InitializePlayers(nPlayers,fieldSize,attributes,kickoffTeam
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 epsillon=1/10;
-playersShortSide=nPlayers/6;
-playersLongSide=nPlayers/6;
+playersShortSide=3;
+playersLongSide=3;
 fieldLength=fieldSize(1);
 fieldWidth=fieldSize(2);
 nAttributes=size(attributes,2);
@@ -21,6 +21,9 @@ for i=1:playersLongSide
         players{1}((i-1)*playersShortSide+j,2)=yPositions(j+1)+epsillon; %y-position
     end
 end
+players{1}(nPlayers/2,:)=[-60 0];
+players{1}(nPlayers,:)=[60 0]; %the goalies
+
 players{1}=[players{1}(1:nPlayers/2,:); -players{1}(1:nPlayers/2,:)];
 if kickoffTeam==0
     players{1}(8,:)=[-2 0]; %mid striker has index 8

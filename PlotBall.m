@@ -1,7 +1,7 @@
 function [] = PlotBall(ball)
 pos = ball(1,:);
 %Ball size
-radie = 1;
+radie = 2;
 
 plotpos = [pos(1)-radie pos(2)-radie 2*radie 2*radie];
 rectangle('Position',plotpos,'Curvature',[1 1],'FaceColor','white');
@@ -14,4 +14,3 @@ hold on
 [X1,Y1] = pol2cart(theta,r);
 line([X;X1]+pos(1),[Y;Y1]+pos(2),'Color','k','LineWidth',1)
 end
-
