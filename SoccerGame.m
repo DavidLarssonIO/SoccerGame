@@ -12,7 +12,8 @@ attributes = [0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1]';
 kickoffTeam=0;
 formation1=[4 3 2];
 formation2=[3 3 3];
-
+formations={[3 3 3],[4 3 2],[4 4 1]};
+nFormations=length(formations);
 
 startPositionBall = [0;0];
 startVelBall = [0;0];

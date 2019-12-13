@@ -38,6 +38,7 @@ shootBallCoefficient=8;
 passBallCoefficient=0.2;
 moveForwardCoefficient=0.6;
 markedDistance=12;
+kickBallProbabilityCoefficient=25;
 
 playerPosition = players{1}(indexOfPlayer,:);
 ballPosition = ball(1,:);
@@ -46,7 +47,7 @@ distanceToGoal = sqrt((goalPosition(1) - playerPosition(1)).^2 + (goalPosition(2
 
 if distanceToBall < actionBallDistance
     lastTeamOnBall=playerTeam;
-    kickBallLikelihood=exp(-distanceToGoal/30);
+    kickBallLikelihood=exp(-distanceToGoal/kickBallProbabilityCoefficient);
     
     whatTodo = rand();
     kickLikeRange = kickBallLikelihood;
