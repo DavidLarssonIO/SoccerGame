@@ -4,7 +4,7 @@ function [ball] = InitializeBall()
 ball=zeros(3,2);
 
 startPosition = [0;0];
-startVel = [2; heaviside(randn)*pi + randn*pi];
+startVel = [0; 0];
 startAcc = startVel;
 
 ball(1,:)=startPosition;

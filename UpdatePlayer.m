@@ -15,7 +15,7 @@ function [updatedPlayer, ball] = UpdatePlayer(players, ball, indexOfPlayer, time
         goalPosition = [-60 0];
     end
 
-    
+    distanceToGoal = norm(goalPosition - playerPosition);
     distanceToBall = norm(ballPosition - playerPosition);
     closenessToGoal = find(teamGoalIndex == indexOfPlayer);
 
@@ -27,7 +27,7 @@ function [updatedPlayer, ball] = UpdatePlayer(players, ball, indexOfPlayer, time
     if (goalKeeper == 0)
         if (ismember(indexOfPlayer, teamBallIndex(1:3)))
             moveTarget = ballPosition;
-        elseif (norm(ballPosition - playerPosition) < 15)
+        elseif (norm(ballPosition - playerPosition) < 25)
             moveTarget = ballPosition;
         elseif (ReceiveBall(playerPosition, ball) < pi/6 && distanceToBall < 60)
             moveTarget = ballPosition;
@@ -56,8 +56,18 @@ function [updatedPlayer, ball] = UpdatePlayer(players, ball, indexOfPlayer, time
     [newPlayerPosition, newPlayerAngle] = ...
         MovePlayer(playerPosition, moveTarget, playerVelocity, timeDelta);
     if (norm(newPlayerPosition - ball(1,:)) <= 1.01)
-        if (closenessToGoal < 4)
+        if (closenessToGoal < 3 && distanceToGoal < 40)
             ball = KickBall(newPlayerPosition, goalPosition, ball, timeDelta);
+            global lastTeamOnBall;
+            lastTeamOnBall = team;
+        elseif (closenessToGoal < 3)
+            if (closenessToGoal == 1)
+                backPassIndex = teamGoalIndex(2)
+            else
+                backPassIndex = teamGoalIndex(1);
+            end
+            backPassPosition = allPlayerPositions(backPassIndex,:);
+            ball = KickBall(newPlayerPosition, backPassPosition, ball, timeDelta);
             global lastTeamOnBall;
             lastTeamOnBall = team;
         else

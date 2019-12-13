@@ -9,11 +9,12 @@ nPlayers = 20;
 field = [120 90];
 attributes = Attributes();
 
-players = InitializePlayers(nPlayers, field, attributes);
-ball = InitializeBall();
+% players = InitializePlayers(nPlayers, field, attributes);
 
+ball = InitializeBall();
+players = InitializePlayers(nPlayers,[3 3 3], [3 3 3],field,attributes,randi([0 1]));
 % Timesteps of the simulation in seconds
-timeSteps = 5400;
+timeSteps = 100;
 % The gametime elapsed between every update
 timeDelta = 1;
 % Time between drawing of each plot
@@ -26,17 +27,16 @@ for time = 1:timeSteps/timeDelta
     PlotPlayers(players)
     PlotBall(ball)
     [ball, players, goal] = CheckBorders(ball, players);
-    
     if (goal == 1)
-        players = InitializePlayers(nPlayers, field, attributes);
-        ball = InitializeBall();
         goals = goals + [1 0];
         disp([num2str(goals(1)) ' - ' num2str(goals(2))])
-    elseif (goal == 2)
-        players = InitializePlayers(nPlayers, field, attributes);
+        players = InitializePlayers(nPlayers,[3 3 3], [3 3 3],field,attributes,randi([0 1]));
         ball = InitializeBall();
+    elseif (goal == 2)
         goals = goals + [0 1];
         disp([num2str(goals(1)) ' - ' num2str(goals(2))])
+        players = InitializePlayers(nPlayers,[3 3 3], [3 3 3],field,attributes,randi([0 1]));
+        ball = InitializeBall();
     end
     
 end

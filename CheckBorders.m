@@ -26,8 +26,8 @@ function [ball, players, goal] = CheckBorders(ball, players)
                 else
                     ball(1,:) = [54.5,0];
                     for i = 1:20
-                        if (players{3}(i,1) == lastTeamOnBall && players{1}(i,1) > 40)
-                            players{1}(i,1) = 40;
+                        if (players{3}(i,1) == lastTeamOnBall && players{1}(i,1) > 35)
+                            players{1}(i,1) = 35;
                         end
                     end
                 end
@@ -39,8 +39,8 @@ function [ball, players, goal] = CheckBorders(ball, players)
                 else
                     ball(1,:) = [-54.5,0];
                     for i = 1:20
-                        if (players{3}(i,1) == lastTeamOnBall && players{1}(i,1) < -40)
-                            players{1}(i,1) = -40;
+                        if (players{3}(i,1) == lastTeamOnBall && players{1}(i,1) < -35)
+                            players{1}(i,1) = -35;
                         end
                     end
                 end
