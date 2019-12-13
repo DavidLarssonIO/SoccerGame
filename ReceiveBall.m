@@ -6,4 +6,4 @@ function receiveAngle = ReceiveBall(position, ball)
     [positionAngle,~] = cart2pol(x,y);
     receiveAngle = abs(positionAngle - ballAngle);
     
-end 
+end

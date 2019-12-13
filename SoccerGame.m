@@ -4,7 +4,7 @@ clear all
 clf
 clc
 
-% videoname = 'LowNoice';
+% videoname = 'Fotboll';
 % vidobj = VideoWriter(videoname, 'Motion JPEG AVI');
 % vidobj.FrameRate = 5;
 % open(vidobj)
@@ -16,8 +16,9 @@ attributes = Attributes();
 
 players = InitializePlayers(nPlayers, field, attributes);
 startPosition = [0;0];
-startVel = [2; heaviside(randn)*pi];
+startVel = [4; heaviside(randn)*pi];
 startAcc = [0; 0];
+startAcc = startVel;
 
 ball = InitializeBall(startPosition, startVel, startAcc);
 

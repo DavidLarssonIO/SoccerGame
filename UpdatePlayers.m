@@ -5,7 +5,9 @@ function [updatedPlayers, updatedBall] = UpdatePlayers(players, ball, timeDelta)
     nPlayers = size(players{1},1);
     updatedPlayers = {zeros(nPlayers,2), zeros(nPlayers,2),  zeros(nPlayers,nAttributes)};
 
-    for indexOfPlayer = 1:nPlayers
+    order = randperm(nPlayers);
+    for i = 1:nPlayers
+        indexOfPlayer = order(i);
         [updatedPlayer, ball] = UpdatePlayer(players, ball, indexOfPlayer, timeDelta);
         updatedPlayers{1}(indexOfPlayer,:) = updatedPlayer{1};
         updatedPlayers{2}(indexOfPlayer,:) = updatedPlayer{2};
