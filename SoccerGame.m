@@ -1,29 +1,19 @@
 %% Main game file
-
+tic
 clear all
 clf
 clc
-
-% videoname = 'Fotboll';
-% vidobj = VideoWriter(videoname, 'Motion JPEG AVI');
-% vidobj.FrameRate = 5;
-% open(vidobj)
-
+goals = [0 0];
 % Initialzing values
 nPlayers = 20;
 field = [120 90];
 attributes = Attributes();
 
 players = InitializePlayers(nPlayers, field, attributes);
-startPosition = [0;0];
-startVel = [4; heaviside(randn)*pi];
-startAcc = [0; 0];
-startAcc = startVel;
-
-ball = InitializeBall(startPosition, startVel, startAcc);
+ball = InitializeBall();
 
 % Timesteps of the simulation in seconds
-timeSteps = 1000;
+timeSteps = 5400;
 % The gametime elapsed between every update
 timeDelta = 1;
 % Time between drawing of each plot
@@ -36,16 +26,21 @@ for time = 1:timeSteps/timeDelta
     PlotPlayers(players)
     PlotBall(ball)
     [ball, players, goal] = CheckBorders(ball, players);
+    
     if (goal == 1)
         players = InitializePlayers(nPlayers, field, attributes);
-        ball = InitializeBall(startPosition, startVel, startAcc);
+        ball = InitializeBall();
+        goals = goals + [1 0];
+        disp([num2str(goals(1)) ' - ' num2str(goals(2))])
+    elseif (goal == 2)
+        players = InitializePlayers(nPlayers, field, attributes);
+        ball = InitializeBall();
+        goals = goals + [0 1];
+        disp([num2str(goals(1)) ' - ' num2str(goals(2))])
     end
-
-%     frame = getframe(gcf);
-%     writeVideo(vidobj, frame)
-
+    
 end
 clf
 PlotConField(field)
 PlotPlayers(players)
-% close(vidobj)
+toc

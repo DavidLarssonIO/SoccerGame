@@ -1,4 +1,4 @@
-function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlayer, timeDelta)
+function [updatedPlayer, ball] = UpdatePlayer(players, ball, indexOfPlayer, timeDelta, teamBallIndex, teamGoalIndex)
 
     % Initializing stuff
     updatedPlayer = {[0 0],[0 0],players{3}(indexOfPlayer,:)};
@@ -15,8 +15,7 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
         goalPosition = [-60 0];
     end
 
-    [teamBallIndex, teamGoalIndex] ...
-            = CheckTempPositions(players, ballPosition, indexOfPlayer, team, goalPosition);
+    
     distanceToBall = norm(ballPosition - playerPosition);
     closenessToGoal = find(teamGoalIndex == indexOfPlayer);
 
@@ -58,20 +57,18 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
         MovePlayer(playerPosition, moveTarget, playerVelocity, timeDelta);
     if (norm(newPlayerPosition - ball(1,:)) <= 1.01)
         if (closenessToGoal < 4)
-            updatedBall = KickBall(newPlayerPosition, goalPosition, ball, timeDelta);
+            ball = KickBall(newPlayerPosition, goalPosition, ball, timeDelta);
             global lastTeamOnBall;
             lastTeamOnBall = team;
         else
             forwardPassIndex = teamGoalIndex(closenessToGoal - randi(2));
             forwardPassPosition = allPlayerPositions(forwardPassIndex,:);
-            updatedBall = KickBall(newPlayerPosition, forwardPassPosition, ball, timeDelta);
+            ball = KickBall(newPlayerPosition, forwardPassPosition, ball, timeDelta);
             global lastTeamOnBall;
             lastTeamOnBall = team;
         end
-    else
-        updatedBall = ball;
     end
-    
+
     updatedPlayer{1} = newPlayerPosition;
     updatedPlayer{2} = [playerVelocity newPlayerAngle];
 

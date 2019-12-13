@@ -2,10 +2,14 @@ function [ball, players, goal] = CheckBorders(ball, players)
     
     if (abs(ball(1,1))  > 60 || abs(ball(1,2))  > 45)
         if (abs(ball(1,2))  < 7.32)
-            disp('Goal!')
             pause(1)
-            goal = 1;
-            return
+            if (ball(1,1) > 60)
+                goal = 1;
+                return
+            else
+                goal = 2;
+                return
+            end
         else
             global lastTeamOnBall;
             otherTeam = -sign(lastTeamOnBall - 1);
