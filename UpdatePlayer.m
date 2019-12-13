@@ -1,4 +1,4 @@
-function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlayer, timeDelta)
+function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlayer, timeDelta, playerOriginalPosition)
 % Updates the player state and ball state by action rules
 % This is the function we can replace with different variants for
 % comparing different players
@@ -30,14 +30,14 @@ if sumOfLikelihoods ~= 1
     throw(ME)
 end
 
-kickBallSigma = 1/4;
+kickBallSigma = 1/200;
 passBallSigma = 1/200;
 kickBallAcceleration = 1;
 passBallAcceleration = 1;
 shootBallCoefficient=8;
 passBallCoefficient=0.2;
 moveForwardCoefficient=0.6;
-markedDistance=8;
+markedDistance=12;
 
 playerPosition = players{1}(indexOfPlayer,:);
 ballPosition = ball(1,:);
@@ -46,7 +46,7 @@ distanceToGoal = sqrt((goalPosition(1) - playerPosition(1)).^2 + (goalPosition(2
 
 if distanceToBall < actionBallDistance
     lastTeamOnBall=playerTeam;
-    kickBallLikelihood=exp(-distanceToGoal/10);
+    kickBallLikelihood=exp(-distanceToGoal/30);
     
     whatTodo = rand();
     kickLikeRange = kickBallLikelihood;
@@ -56,16 +56,16 @@ if distanceToBall < actionBallDistance
         targetPosition = goalPosition;
         ball = KickBall(ball, kickBallSigma, shootBallCoefficient, kickBallAcceleration, targetPosition, timeDelta);
     elseif IsMarked(players,indexOfPlayer,playerTeam,markedDistance)
-        targetPosition = ChoosePlayerToPass(players,indexOfPlayer);       
+        targetPosition = ChoosePlayerToPass(players,indexOfPlayer,1.5*markedDistance);       
         ball = PassBall(ball, passBallSigma, passBallCoefficient, passBallAcceleration, targetPosition, timeDelta);
     else % I am not marked and can go forward with the ball
-        targetPosition = [goalPosition(1) players{1}(indexOfPlayer,2)];
+        targetPosition = [goalPosition(1)+sign(playerTeam-1/2) players{1}(indexOfPlayer,2)];
         ball = KickBall(ball, kickBallSigma, moveForwardCoefficient, kickBallAcceleration, targetPosition, timeDelta); 
     end
 end
 
 updatedBall = ball;
-updatedPlayer = Move(players, indexOfPlayer, updatedBall, timeDelta);
+updatedPlayer = Move(players, indexOfPlayer, updatedBall, timeDelta, playerOriginalPosition);
 
 end
 

@@ -11,4 +11,6 @@ kickDirection(2) = kickDirection(2) + normrnd(0, kickBallSigma);
 updatedBall(2,:)= updatedBall(2,:)+kickBallCoefficient*passLength*kickDirection;
 %updatedBall = BallAction(ball, timeDelta, kickBallAcceleration .* kickDirection);
 
+disp('pass ball! ',num2str(targetPosition))
+
 end

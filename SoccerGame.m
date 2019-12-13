@@ -10,13 +10,13 @@ nPlayers = 20;
 field = [120 90];
 attributes = [0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1]';
 kickoffTeam=0;
+formation1=[4 3 2];
+formation2=[3 3 3];
 
-%players = InitializePlayers(nPlayers, field, attributes);
+
 startPositionBall = [0;0];
 startVelBall = [0;0];
 startAccBall = [0;0];
-
-%ball = InitializeBall(startPositionBall, startVelBall, startAccBall);
 
 goalsTeam1=0;
 goalsTeam2=0;
@@ -35,10 +35,10 @@ pause(0);
 for timeE = 1:timeSteps/timeDelta
     isGoal=false;
     ball = InitializeBall(startPositionBall, startVelBall, startAccBall);
-    players = InitializePlayers(nPlayers, field, attributes,kickoffTeam);
+    [players,playerOriginalPosition] = InitializePlayers(nPlayers, formation1, formation2, field, attributes,kickoffTeam);
     pause(1);
     while isGoal==false
-        [players, ball] = Update(players, ball, timeSync, timeDelta);
+        [players, ball] = Update(players, ball, timeSync, timeDelta, playerOriginalPosition);
         PlotConField(field)
         PlotPlayers(players)
         PlotBall(ball)

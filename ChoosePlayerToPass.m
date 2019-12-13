@@ -1,8 +1,7 @@
-function targetPosition = ChoosePlayerToPass(players,indexOfPlayer)
+function targetPosition = ChoosePlayerToPass(players,indexOfPlayer,markedDistance)
 %UNTITLED4 Summary of this function goes here
 %   Detailed explanation goes here
 minPassLength=5;
-markedDistance=5;
 isMarked=true;
 nPlayers=length(players{1});
 playerTeam=players{3}(indexOfPlayer);

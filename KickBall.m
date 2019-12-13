@@ -11,4 +11,8 @@ kickDirection(2) = kickDirection(2) + normrnd(0, kickBallSigma);
 updatedBall(2,:)= updatedBall(2,:)+kickBallCoefficient*kickDirection;
 %updatedBall = BallAction(ball, timeDelta, kickBallAcceleration .* kickDirection);
 
+if kickBallCoefficient==8
+    disp('kick ball!')
+end
+
 end

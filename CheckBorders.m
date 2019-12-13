@@ -52,6 +52,7 @@ function [ball, players, goal] = CheckBorders(ball, players)
             ball(2,:) = [0 0];
             ball(3,:) = [0 0];
             players{1}(closestPlayer,:) = ball(1,:);
+%             players{1}(closestPlayer,:) = [ball(1,1)+sign(playerTeam), ball(1,2)];
         end
     end
     goal = 0;
