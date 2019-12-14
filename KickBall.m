@@ -12,11 +12,12 @@ function updatedBall = KickBall(target, ball, timeDelta)
     unitTargetVector = targetVector/norm(targetVector);
     [xBall,yBall] = pol2cart(ball(3,2), ball(3,1));
 
-    kickForce = 5;
+    kickForce = 4;
     xBall = xBall + unitTargetVector(1)*kickForce/timeDelta;
     yBall = yBall + unitTargetVector(2)*kickForce/timeDelta;
     
     updatedBall = ball;
     [updatedBall(3,2), updatedBall(3,1)] = cart2pol(xBall, yBall);
+    pause(0.5)
 
 end

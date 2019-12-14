@@ -42,14 +42,14 @@ if (exist('bestBackwardPass','var') == 0)
     bestBackwardPass = goalPosition;
 end
 
-% if team == 1
-%     hold on
-%     scatter(bestForwardPass(1),bestForwardPass(2), 500,'filled','r')
-%     scatter(bestBackwardPass(1),bestBackwardPass(2),500,'filled','g')
-% else
-%     hold on
-%     scatter(bestForwardPass(1),bestForwardPass(2), 500,'filled','m')
-%     scatter(bestBackwardPass(1),bestBackwardPass(2),500,'filled','y')
-% end
+if team == 1
+    hold on
+    scatter(bestForwardPass(1),bestForwardPass(2), 500,'filled','r')
+    scatter(bestBackwardPass(1),bestBackwardPass(2),500,'filled','g')
+else
+    hold on
+    scatter(bestForwardPass(1),bestForwardPass(2), 500,'filled','m')
+    scatter(bestBackwardPass(1),bestBackwardPass(2),500,'filled','y')
+end
 
 end

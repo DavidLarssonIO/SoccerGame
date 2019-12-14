@@ -1,4 +1,4 @@
-function [teamBallIndex, teamGoalIndex] ...
+function [teamBallIndex, teamGoalIndex, minDistanceToBall] ...
             = CheckTeamPositions(players, ball, team, goalPosition)
 
     teamIndex = find(players{3}(:,1) == team);
@@ -8,6 +8,7 @@ function [teamBallIndex, teamGoalIndex] ...
     
     teamIndex = find(players{3}(:,1) == team);
     teamDistanceToBall = vecnorm(teamPositions - ballPosition, 2, 2);
+    minDistanceToBall = min(teamDistanceToBall);
     [~,Bsort] = sort(teamDistanceToBall); %Get the order
     teamBallIndex = teamIndex(Bsort);
 

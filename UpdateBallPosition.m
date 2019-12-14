@@ -9,7 +9,8 @@ function updatedBall = UpdateBallPosition(ball, timeDelta)
     updatedBall(2,2) = atan2(xyVelocity(2), xyVelocity(1));
     updatedBall(2,1) = norm(xyVelocity);
     
-    beta = 0.9;
+    beta = 0.85;
+    beta = beta^timeDelta;
     xyPosition = ball(1,:);
     updatedBall(1,:) = xyPosition + xyVelocity*timeDelta;
     updatedBall(2,1) = updatedBall(2,1)*beta;

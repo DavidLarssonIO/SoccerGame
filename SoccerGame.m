@@ -14,12 +14,12 @@ kickOffTeam = randi([0 1]);
 
 % players = InitializePlayers(nPlayers, field, attributes);
 
-ball = InitializeBall();
+ball = InitializeBall(kickOffTeam);
 players = InitializePlayers(nPlayers,team0Formation,team1Formation,field,attributes,kickOffTeam);
 % Timesteps of the simulation in seconds
-timeSteps = 1000;
+timeSteps = 5400;
 % The gametime elapsed between every update
-timeDelta = 1;
+timeDelta = 0.75;
 % Time between drawing of each plot
 timeSync = 0.1*timeDelta;
 
@@ -35,13 +35,13 @@ for time = 1:timeSteps/timeDelta
         goals = goals + [1 0];
         disp([num2str(goals(1)) ' - ' num2str(goals(2))])
         players = InitializePlayers(nPlayers,team0Formation,team1Formation,field,attributes,kickOffTeam);
-        ball = InitializeBall();
+        ball = InitializeBall(kickOffTeam);
     elseif (goal == 2)
         kickOffTeam = 0;
         goals = goals + [0 1];
         disp([num2str(goals(1)) ' - ' num2str(goals(2))])
         players = InitializePlayers(nPlayers,team0Formation,team1Formation,field,attributes,kickOffTeam);
-        ball = InitializeBall();
+        ball = InitializeBall(kickOffTeam);
     end
     
 end
