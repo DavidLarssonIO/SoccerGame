@@ -1,6 +1,7 @@
-function [players,playerOriginalPosition] = InitializePlayers(nPlayers,formation1,formation2,fieldSize,attributes,kickoffTeam)
+function [players,playerOriginalPosition] = InitializePlayers(formation1,formation2,fieldSize,attributes,kickoffTeam)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
+nPlayers=sum(formation1)+sum(formation2)+2;
 epsillon=1/10;
 fieldLength=fieldSize(1);
 fieldWidth=fieldSize(2);

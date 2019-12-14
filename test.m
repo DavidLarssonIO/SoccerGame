@@ -2,5 +2,6 @@
 clear all;
 clc;
 
-A=[NaN 0 NaN inf]
-
+A=[1 2; 3 4; 7 8]
+B=[5 6];
+cat(1,A,B)

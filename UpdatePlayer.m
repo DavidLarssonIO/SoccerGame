@@ -16,7 +16,7 @@ else
     goalPosition = [-60 0];
 end
 
-actionBallDistance = 1;
+actionBallDistance = 1.3;
 actionPlayerDistance = 36;
 actionGoalDistance = 20;
 
