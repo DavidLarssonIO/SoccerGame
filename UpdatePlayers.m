@@ -16,9 +16,11 @@ for indexOfPlayer = 1:nPlayers
     updatedPlayers{3}(indexOfPlayer,:) = updatedPlayer{3};
     ball=updatedBall;
 end
+
+
 % TODO: Add ballAction function here since it only should update once
 updatedBall = UpdateBallPosition(ball, timeDelta, acceleration);
+
 [updatedPlayers{1}(:,1),updatedPlayers{1}(:,2),updatedBall]=...
     Collisions(updatedPlayers{1}(:,1),updatedPlayers{1}(:,2),updatedBall,particleRadius); 
-
 end
