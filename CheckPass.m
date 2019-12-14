@@ -7,12 +7,13 @@ function [bestForwardPass,bestBackwardPass] = CheckPass(players, ball, team)
 if (team == 0) % Team 0
 	friendlyTeam = players{1}(1:10,:);
     opponentTeam = players{1}(11:20,:);
+    goalPosition = [60 0];
     
     for i = 1:10
         target = friendlyTeam(i,:);
         targetMinAngle = inf;
-        
-        if (target(1) > ball(1,1) && norm(ballPosition - target) > 2.01) % Forward pass
+        % Forward pass
+        if (norm(goalPosition-target) < norm(goalPosition-ball(1,:)) && norm(ballPosition - target) > 2.01)
             for j = 1:10
                 if (norm(target - ball) < norm(opponentTeam(j,:) - ball))
                     angleDifference = CheckAngledifference(ball(1,:), target, opponentTeam(j,:));
@@ -25,8 +26,8 @@ if (team == 0) % Team 0
                 maxAngleForward = targetMinAngle;
                 bestForwardPass = target;
             end
-        
-        elseif (norm(ballPosition - target) > 2.01) % Backward pass
+        % Backward pass
+        elseif (norm(ballPosition - target) > 2.01)
             for j = 1:10
                 if (norm(target - ball) < norm(opponentTeam(j,:) - ball))
                     angleDifference = CheckAngledifference(ball(1,:), target, opponentTeam(j,:));
@@ -54,12 +55,13 @@ if (team == 0) % Team 0
 else % Team 1
 	friendlyTeam = players{1}(11:20,:);
     opponentTeam = players{1}(1:10,:);
+    goalPosition = [-60 0];
     
     for i = 1:10
         target = friendlyTeam(i,:);
         targetMinAngle = inf;
-        
-        if (target(1) < ball(1,1) && norm(ballPosition - target) > 2.01) % Forward pass
+        % Forward pass
+        if (norm(goalPosition-target) < norm(goalPosition-ball(1,:)) && norm(ballPosition - target) > 2.01)
             for j = 1:10
                 if (norm(target - ball) < norm(opponentTeam(j,:) - ball))
                     angleDifference = CheckAngledifference(ball(1,:), target, opponentTeam(j,:));
@@ -72,8 +74,8 @@ else % Team 1
                 maxAngleForward = targetMinAngle;
                 bestForwardPass = target;
             end
-        
-        elseif (norm(ballPosition - target) > 2.01) % Backward pass
+        % Backward pass
+        elseif (norm(ballPosition - target) > 2.01)
             for j = 1:10
                 if (norm(target - ball) < norm(opponentTeam(j,:) - ball))
                     angleDifference = CheckAngledifference(ball(1,:), target, opponentTeam(j,:));
