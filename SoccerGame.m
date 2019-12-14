@@ -1,32 +1,27 @@
 %% Main game file
-
+tic
 clear all
 clf
 clc
-
-videoname = 'LowNoice';
-vidobj = VideoWriter(videoname, 'Motion JPEG AVI');
-vidobj.FrameRate = 5;
-open(vidobj)
-
+goals = [0 0];
 % Initialzing values
-nPlayers = 22;
+nPlayers = 20;
 field = [120 90];
 attributes = Attributes();
+team0Formation = [9];
+team1Formation = [9];
+kickOffTeam = randi([0 1]);
 
-players = InitializePlayers(nPlayers, field, attributes);
-startPosition = [0;0];
-startVel = [2; heaviside(randn)*pi];
-startAcc = [0; 0];
+% players = InitializePlayers(nPlayers, field, attributes);
 
-ball = InitializeBall(startPosition, startVel, startAcc);
-
+ball = InitializeBall();
+players = InitializePlayers(nPlayers,team0Formation,team1Formation,field,attributes,kickOffTeam);
 % Timesteps of the simulation in seconds
 timeSteps = 1000;
 % The gametime elapsed between every update
-timeDelta = 0.5;
+timeDelta = 1;
 % Time between drawing of each plot
-timeSync = 0.001*timeDelta;
+timeSync = 0.1*timeDelta;
 
 for time = 1:timeSteps/timeDelta
     goal = 0;
@@ -34,17 +29,21 @@ for time = 1:timeSteps/timeDelta
     PlotConField(field)
     PlotPlayers(players)
     PlotBall(ball)
-    [ball, players, goal] = CheckBorders(ball, players);
+    [ball, players, goal] = CheckBordersPause(ball, players);
     if (goal == 1)
-        players = InitializePlayers(nPlayers, field, attributes);
-        ball = InitializeBall(startPosition, startVel, startAcc);
+        kickOffTeam = 1;
+        goals = goals + [1 0];
+        disp([num2str(goals(1)) ' - ' num2str(goals(2))])
+        players = InitializePlayers(nPlayers,team0Formation,team1Formation,field,attributes,kickOffTeam);
+        ball = InitializeBall();
+    elseif (goal == 2)
+        kickOffTeam = 0;
+        goals = goals + [0 1];
+        disp([num2str(goals(1)) ' - ' num2str(goals(2))])
+        players = InitializePlayers(nPlayers,team0Formation,team1Formation,field,attributes,kickOffTeam);
+        ball = InitializeBall();
     end
-
-    frame = getframe(gcf);
-    writeVideo(vidobj, frame)
-
+    
 end
-clf
-PlotConField(field)
-PlotPlayers(players)
-close(vidobj)
+
+toc

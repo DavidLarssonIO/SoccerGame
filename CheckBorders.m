@@ -2,10 +2,14 @@ function [ball, players, goal] = CheckBorders(ball, players)
     
     if (abs(ball(1,1))  > 60 || abs(ball(1,2))  > 45)
         if (abs(ball(1,2))  < 7.32)
-            disp('Goal!')
-            pause(1)
-            goal = 1;
-            return
+%             pause(1)
+            if (ball(1,1) > 60)
+                goal = 1;
+                return
+            else
+                goal = 2;
+                return
+            end
         else
             global lastTeamOnBall;
             otherTeam = -sign(lastTeamOnBall - 1);
@@ -13,16 +17,17 @@ function [ball, players, goal] = CheckBorders(ball, players)
             distanceToBall = vecnorm(players{1}(teamIndex,:) - ball(1,:), 2, 2);
             [~, closestPlayer] = min(distanceToBall);
             closestPlayer = teamIndex(closestPlayer);
-            pause(1)
+%             pause(1)
             
             if (ball(1,1) > 60)
                 ball(1,1) = 60;
                 if (otherTeam == 0)
                     ball(1,2) = sign(ball(1,2)) * 45;
                 else
-                    for i = 1:22
-                        if (players{3}(i,1) == lastTeamOnBall && players{1}(i,1) > 40)
-                            players{1}(i,1) = 40;
+                    ball(1,:) = [54.5,0];
+                    for i = 1:20
+                        if (players{3}(i,1) == lastTeamOnBall && players{1}(i,1) > 35)
+                            players{1}(i,1) = 35;
                         end
                     end
                 end
@@ -32,9 +37,10 @@ function [ball, players, goal] = CheckBorders(ball, players)
                 if (otherTeam == 1)
                     ball(1,2) = sign(ball(1,2)) * 45;
                 else
-                    for i = 1:22
-                        if (players{3}(i,1) == lastTeamOnBall && players{1}(i,1) < -40)
-                            players{1}(i,1) = -40;
+                    ball(1,:) = [-54.5,0];
+                    for i = 1:20
+                        if (players{3}(i,1) == lastTeamOnBall && players{1}(i,1) < -35)
+                            players{1}(i,1) = -35;
                         end
                     end
                 end
