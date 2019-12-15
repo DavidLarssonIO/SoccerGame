@@ -18,6 +18,6 @@ function updatedBall = KickBall(target, ball, timeDelta)
     
     updatedBall = ball;
     [updatedBall(3,2), updatedBall(3,1)] = cart2pol(xBall, yBall);
-    pause(0.5)
+%     pause(0.25)
 
 end

@@ -1,9 +1,10 @@
 function [minPassAngle, forwardPass] = ChekPassAngle(players,playerPosition,ballPosition,team)
 
-    opponentPositions = players{1}(team*10+1:team*10+10,:);
+    nPlayers = size(players{1},1);
+    opponentPositions = players{1}(team*nPlayers/2+1:team*nPlayers/2+nPlayers/2,:);
     
     minPassAngle = inf;
-    for i = 1:10
+    for i = 1:nPlayers/2
         if (norm(opponentPositions(i,:) - ballPosition) < norm(playerPosition - ballPosition))
             passAngle = AngleDifference(ballPosition, playerPosition, opponentPositions(i,:));
             if (minPassAngle > passAngle)

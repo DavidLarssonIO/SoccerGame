@@ -10,9 +10,6 @@ function [updatedPlayers, ball] = UpdatePlayers(players, ball, timeDelta)
     [teamBallIndex1, teamGoalIndex1, minDistanceToBall1] ...
             = CheckTeamPositions(players, ball, 1, [-60 0]);
 
-%     minDistanceToBall0
-%     minDistanceToBall1
-    
     if (minDistanceToBall0 < timeDelta + 1)
         [bestForwardPass0,bestBackwardPass0] = CheckPass(players, ball, 0);
     else
@@ -28,7 +25,7 @@ function [updatedPlayers, ball] = UpdatePlayers(players, ball, timeDelta)
     for i = 1:nPlayers
         
         indexOfPlayer = order(i);
-        if indexOfPlayer < 11
+        if indexOfPlayer < nPlayers/2+1
             
         [updatedPlayer, ball] = UpdatePlayer(players, ball, indexOfPlayer, ...
         timeDelta, teamBallIndex0, teamGoalIndex0, bestForwardPass0, bestBackwardPass0);

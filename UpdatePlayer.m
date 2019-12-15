@@ -61,7 +61,11 @@ function [updatedPlayer, ball] = UpdatePlayer(players, ball, indexOfPlayer, ...
         MovePlayer(playerPosition, moveTarget, playerVelocity, timeDelta);
     
     if (norm(newPlayerPosition - ball(1,:)) < 1)
-        if (closenessToGoal <= 2 && distanceToGoal < 40)
+        if (abs(playerPosition(1)) == 60 && abs(playerPosition(2)) == 45)
+            ball = KickBall(bestBackwardPass, ball, timeDelta);
+            global lastTeamOnBall;
+            lastTeamOnBall = team;
+        elseif (closenessToGoal <= 2 && distanceToGoal < 40)
             ball = KickBall(goalPosition, ball, timeDelta);
             global lastTeamOnBall;
             lastTeamOnBall = team;
@@ -69,9 +73,6 @@ function [updatedPlayer, ball] = UpdatePlayer(players, ball, indexOfPlayer, ...
             ball = KickBall(bestBackwardPass, ball, timeDelta);
             global lastTeamOnBall;
             lastTeamOnBall = team;
-            if isnan(ball(3,1))
-                disp(ball(1,:))
-            end
         else
             ball = KickBall(bestForwardPass, ball, timeDelta);
             global lastTeamOnBall;
@@ -79,12 +80,6 @@ function [updatedPlayer, ball] = UpdatePlayer(players, ball, indexOfPlayer, ...
         end
     end
     
-    if isnan(ball(3,1))
-        disp(closenessToGoal)
-        disp(indexOfPlayer)
-        disp(bestBackwardPass)
-        disp(bestForwardPass)
-    end
     updatedPlayer{1} = newPlayerPosition;
     updatedPlayer{2} = [playerVelocity newPlayerAngle];
 
