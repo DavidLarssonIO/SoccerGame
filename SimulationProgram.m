@@ -51,13 +51,13 @@ for iFormation=1:nFormations
                 time=time+1;
             end
         end
-        clf
-        PlotConField(field)
-        PlotPlayers(players)
-        PlotBall(ball)
-        txt = {[sprintf('%02d',fix(time/60)) ':' sprintf('%02d',mod(time,60))],...
-            [num2str(goalsTeam1) '-' num2str(goalsTeam2)]};
-        text(0,48,txt,'HorizontalAlignment','center')
+        %clf
+        %PlotConField(field)
+        %PlotPlayers(players)
+        %PlotBall(ball)
+        %txt = {[sprintf('%02d',fix(time/60)) ':' sprintf('%02d',mod(time,60))],...
+        %    [num2str(goalsTeam1) '-' num2str(goalsTeam2)]};
+        %text(0,48,txt,'HorizontalAlignment','center')
         disp('match spelad')
         resultMatrix(jFormation,iFormation)=goalsTeam1; % goals scored by formation i
         resultMatrix(iFormation,jFormation)=goalsTeam2;
@@ -87,5 +87,5 @@ allStatisticsMatrix(6,:) = nGoalsAgainst;
 disp(allStatisticsMatrix)
 %allStatisticsMatrix rader är wins, draws, losses, points, goals scored and
 %goals against
-
+save('36FormationSimulation')
 
