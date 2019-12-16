@@ -6,10 +6,11 @@ function [updatedPlayer] = Move(players, indexOfPlayer, ball, timeDelta, playerO
 % The velocity is set by the norm of the initial values in the xVel and
 % yVel in the player matrix.
 nPlayers=length(players{1});
+playerTeam=players{3}(indexOfPlayer);
 fieldWidth=90;
-actionPlayerDistance = 25;
+actionPlayerDistance = 15; % 12-15 seems good
 
-d=2;
+% d=2;
 
 % playerOriginalPosition=[-40-d -30; -40-d 0; -40-d 30; 0-d -30; 0-d 0; 0-d 30; 40-d -30; 40-d 0; 40-d 30; -57 0;...
 %     40+d 30; 40+d 0; 40+d -30; 0+d 30; 0+d 0; 0+d -30; -40+d 30; -40+d 0; -40+d -30; 57 0];
@@ -20,17 +21,24 @@ d=2;
 
 playerPosition = players{1}(indexOfPlayer,:);
 playerVelocity = players{2}(indexOfPlayer,:);
+playerPositions = players{1}(playerTeam*nPlayers/2+(1:nPlayers/2),:);
+
 ballPosition = ball(1,:);
 distanceToBall = norm(ballPosition-playerPosition);
+distanceToBallForAllTeamMates = vecnorm((ballPosition-playerPositions)');
+[~,indexOfPlayerThatWillGoForTheBall]=min(distanceToBallForAllTeamMates);
 distanceToOriginalPosition = norm(playerOriginalPosition(indexOfPlayer,:)-playerPosition);
+
 if indexOfPlayer==nPlayers/2 || indexOfPlayer==nPlayers %goalie
-    if (distanceToBall<actionPlayerDistance && distanceToOriginalPosition < 1/3*actionPlayerDistance)
+    if (distanceToBall<actionPlayerDistance && distanceToOriginalPosition < actionPlayerDistance)...
+            || indexOfPlayer==(indexOfPlayerThatWillGoForTheBall+playerTeam*nPlayers/2)
         playerDirection = atan2(ballPosition(2) - playerPosition(2),ballPosition(1) - playerPosition(1));
     else
         playerDirection = atan2(playerOriginalPosition(indexOfPlayer,2)- playerPosition(2),playerOriginalPosition(indexOfPlayer,1)- playerPosition(1));
     end
 else %players (not goalie)
-    if (distanceToBall<actionPlayerDistance && distanceToOriginalPosition < 1.0*actionPlayerDistance)
+    if (distanceToBall<actionPlayerDistance && distanceToOriginalPosition < 1.0*actionPlayerDistance)...
+            || indexOfPlayer==(indexOfPlayerThatWillGoForTheBall+playerTeam*nPlayers/2)
         playerDirection = atan2(ballPosition(2) - playerPosition(2),ballPosition(1) - playerPosition(1));
     else
         playerDirection = atan2(playerOriginalPosition(indexOfPlayer,2)- playerPosition(2),playerOriginalPosition(indexOfPlayer,1)- playerPosition(1));

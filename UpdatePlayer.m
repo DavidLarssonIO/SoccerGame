@@ -5,6 +5,21 @@ function [updatedPlayer, updatedBall] = UpdatePlayer(players, ball, indexOfPlaye
 global lastTeamOnBall;
 nAttributes = size(players{3},2);
 updatedPlayer = {[0 0],[1 0],players{3}};
+nPlayers=length(players{1});
+
+kickBallSigma = 1/200;
+passBallSigma = 1/200;
+kickBallAcceleration = 1;
+passBallAcceleration = 1;
+shootBallCoefficient=9;
+passBallCoefficient=0.2;
+moveForwardCoefficient=0.5;
+markedDistance=12; %10-15 seems optimal
+kickBallProbabilityCoefficient=25;
+actionBallDistance = 1.5;
+actionPlayerDistance = 36;
+actionGoalDistance = 30;
+
 
 %fieldWidth=90;
 %nPlayers=size(players{1},1);
@@ -16,10 +31,6 @@ else
     goalPosition = [-60 0];
 end
 
-actionBallDistance = 1.3;
-actionPlayerDistance = 36;
-actionGoalDistance = 20;
-
 kickBallLikelihood = 0.0;
 passBallLikelihood = 0.5;
 doNothingWithBallLikelihood = 0.5;
@@ -29,16 +40,6 @@ if sumOfLikelihoods ~= 1
     ME = MException('The sum of the likelyhoods has to equal 1. They are currently summed to %s',sumOfLikelihoods);
     throw(ME)
 end
-
-kickBallSigma = 1/200;
-passBallSigma = 1/200;
-kickBallAcceleration = 1;
-passBallAcceleration = 1;
-shootBallCoefficient=8;
-passBallCoefficient=0.2;
-moveForwardCoefficient=0.6;
-markedDistance=12;
-kickBallProbabilityCoefficient=25;
 
 playerPosition = players{1}(indexOfPlayer,:);
 ballPosition = ball(1,:);
@@ -56,8 +57,8 @@ if distanceToBall < actionBallDistance
     if  whatTodo <= kickLikeRange || distanceToGoal < actionGoalDistance
         targetPosition = goalPosition;
         ball = KickBall(ball, kickBallSigma, shootBallCoefficient, kickBallAcceleration, targetPosition, timeDelta);
-    elseif IsMarked(players,indexOfPlayer,playerTeam,markedDistance)
-        targetPosition = ChoosePlayerToPass(players,indexOfPlayer,1.5*markedDistance);       
+    elseif IsMarked(players,indexOfPlayer,playerTeam,markedDistance) || mod(indexOfPlayer,nPlayers/2)==0 %pass if you are the goalie
+        targetPosition = ChoosePlayerToPass(players,indexOfPlayer,markedDistance);       
         ball = PassBall(ball, passBallSigma, passBallCoefficient, passBallAcceleration, targetPosition, timeDelta);
     else % I am not marked and can go forward with the ball
         targetPosition = [goalPosition(1)+sign(playerTeam-1/2) players{1}(indexOfPlayer,2)];

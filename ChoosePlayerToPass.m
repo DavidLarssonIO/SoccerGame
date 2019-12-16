@@ -19,7 +19,7 @@ elseif playerTeam==1
     distanceToOpponents = z(indexOfPlayer,1:nPlayers/2);
 end
 
-distanceToTeamMates(10)=NaN; %Do not pass the goalie
+distanceToTeamMates(nPlayers/2)=NaN; %Do not pass the goalie
 distanceToTeamMates(distanceToTeamMates < minPassLength) = NaN; %passa inte en för kort pass
 
 while isMarked==true

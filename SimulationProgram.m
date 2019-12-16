@@ -13,6 +13,10 @@ resultMatrix=zeros(nFormations,nFormations);
 
 disp('Förväntad tid simuleringen kommer ta: (i minuter)')
 disp(num2str((nFormations^2/2)/4))
+disp('Matcher som kommer spelas: ')
+disp(num2str(nFormations*(nFormations-1)/2))
+iMatch=0;
+
 pause(2)
 
 % Timesteps of the simulation in seconds
@@ -51,14 +55,16 @@ for iFormation=1:nFormations
                 time=time+1;
             end
         end
-        clf
-        PlotConField(field)
-        PlotPlayers(players)
-        PlotBall(ball)
-        txt = {[sprintf('%02d',fix(time/60)) ':' sprintf('%02d',mod(time,60))],...
-            [num2str(goalsTeam1) '-' num2str(goalsTeam2)]};
-        text(0,48,txt,'HorizontalAlignment','center')
-        disp('match spelad')
+%         clf
+%         PlotConField(field)
+%         PlotPlayers(players)
+%         PlotBall(ball)
+%         txt = {[sprintf('%02d',fix(time/60)) ':' sprintf('%02d',mod(time,60))],...
+%             [num2str(goalsTeam1) '-' num2str(goalsTeam2)]};
+%         text(0,48,txt,'HorizontalAlignment','center')
+        iMatch=iMatch+1;
+        disp('Finished iMatch:')
+        disp(iMatch)
         resultMatrix(jFormation,iFormation)=goalsTeam1; % goals scored by formation i
         resultMatrix(iFormation,jFormation)=goalsTeam2;
         toc
@@ -87,5 +93,7 @@ allStatisticsMatrix(6,:) = nGoalsAgainst;
 disp(allStatisticsMatrix)
 %allStatisticsMatrix rader är wins, draws, losses, points, goals scored and
 %goals against
+disp('Simulation Done!')
+
 
 

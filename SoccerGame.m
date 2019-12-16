@@ -8,8 +8,8 @@ clc
 
 field = [120 90];
 kickoffTeam=0;
-formation1=[2 3 2];
-formation2=[3 3 1];
+formation1=[3 2 4];
+formation2=[8 1 0];
 nPlayers=sum(formation1)+sum(formation2)+2;
 attributes = [zeros(nPlayers/2,1); ones(nPlayers/2,1)];
 
