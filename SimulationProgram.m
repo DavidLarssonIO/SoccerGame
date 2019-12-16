@@ -87,5 +87,5 @@ allStatisticsMatrix(6,:) = nGoalsAgainst;
 disp(allStatisticsMatrix)
 %allStatisticsMatrix rader är wins, draws, losses, points, goals scored and
 %goals against
-save('36FormationSimulation')
+save('36FormationSimulation16Dec3')
 

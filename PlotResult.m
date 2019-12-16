@@ -1,4 +1,4 @@
-function [] = PlotResult(resultMatrix,formation)
+function [] = PlotResult(resultMatrix)
 N = length(resultMatrix);
 resultMatrixPrime = zeros(N,N);
 for i = 1:N
@@ -16,9 +16,9 @@ set(gca, 'XTick', 1.5:space:N+0.5, 'YTick', 1.5:space:N+0.5, ...
     'XLim', [1 N+1], 'YLim', [1 N+1]);
 %title(['$t = $ ' num2str(time)],'Interpreter','latex')
 str = [];
-for i = 1:N
-    str = [str;'[' num2str(formation{i}) ']'];
-end
+%for i = 1:N
+%    str = [str;'[' num2str(formation{i}) ']'];
+%end
 
 xticklabels([]);
 yticklabels(str);
