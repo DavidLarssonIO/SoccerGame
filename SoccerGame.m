@@ -5,11 +5,11 @@ clf
 clc
 goals = [0 0];
 % Initialzing values
-nPlayers = 14;
+nPlayers = 20;
 field = [120 90];
 attributes = Attributes(nPlayers);
-team0Formation = [2 2 2];
-team1Formation = [3 2 1];
+team0Formation = [3 3 3];
+team1Formation = [3 2 4];
 kickOffTeam = randi([0 1]);
 
 % players = InitializePlayers(nPlayers, field, attributes);
