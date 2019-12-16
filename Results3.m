@@ -27,6 +27,6 @@ end
 imagesc(trevs3Matrix)
 colorbar
 axis equal
-set(gca, 'XTick', 1:2, 'YTick', 1:28)
+set(gca, 'YTick', 1:28)
 xticklabels([]);
 yticklabels(str);
