@@ -8,8 +8,8 @@ clc
 
 field = [120 90];
 kickoffTeam=0;
-formation1=[3 2 4];
-formation2=[8 1 0];
+formation1=[2 1 2 1];
+formation2=[3 2 1];
 nPlayers=sum(formation1)+sum(formation2)+2;
 attributes = [zeros(nPlayers/2,1); ones(nPlayers/2,1)];
 
@@ -31,11 +31,14 @@ timeSync = 0.01;
 % Whit these settings one simulation will take 54 seconds
 time=0;
 
+pause(0)
+
 while time < timeSteps
     isGoal=false;
     ball = InitializeBall(startPositionBall, startVelBall, startAccBall);
     [players,playerOriginalPosition] = InitializePlayers(formation1, formation2, field, attributes,kickoffTeam);
     pause(1);
+%     FormationPloter(formation1,formation2,field,attributes,kickoffTeam)
     while isGoal==false && time < timeSteps
         [players, ball] = Update(players, ball, timeSync, timeDelta, playerOriginalPosition);
         PlotConField(field)

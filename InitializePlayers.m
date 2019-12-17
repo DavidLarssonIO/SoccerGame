@@ -48,9 +48,9 @@ players{1}(nPlayers/2+1:nPlayers,2)=players{1}(nPlayers/2+1:nPlayers,2)+epsillon
 
 % players{1}=[players{1}(1:nPlayers/2,:); -players{1}(1:nPlayers/2,:)];
 if kickoffTeam==0
-    players{1}(5,:)=[-2 0]; %mid striker has index 8
+    players{1}(nPlayers/2-1,:)=[-2 0]; %striker has index 10
 elseif kickoffTeam==1
-    players{1}(nPlayers/2+5,:)=[2 0];
+    players{1}(nPlayers-1,:)=[2 0];
 end
 
 %Fixing angles, velocities=1 in the begining
