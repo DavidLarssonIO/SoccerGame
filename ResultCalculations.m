@@ -13,8 +13,8 @@ resultMatrix2 = cell2mat(struct2cell(load('Data/resultMatrix2.mat')));
 resultMatrix3 = cell2mat(struct2cell(load('Data/resultMatrix3.mat')));
 resultMatrix4 = cell2mat(struct2cell(load('Data/resultMatrix4.mat')));
 
-allStatisticsMatrix = (allStatisticsMatrix1 + allStatisticsMatrix2 + allStatisticsMatrix3 + allStatisticsMatrix4) / 3;
-resultMatrix = (resultMatrix1 + resultMatrix2 + resultMatrix3 + resultMatrix4) / 3;
+allStatisticsMatrix = (allStatisticsMatrix1 + allStatisticsMatrix2 + allStatisticsMatrix3 + allStatisticsMatrix4) / 4;
+resultMatrix = (resultMatrix1 + resultMatrix2 + resultMatrix3 + resultMatrix4) / 4;
 
 
 %%
@@ -26,7 +26,7 @@ goalsScoredStat = allStatisticsMatrix(5,:);
 goalsAgainstStat = allStatisticsMatrix(6,:);
 
 
-k = 36;
+k = 3;
 
 % Top 3 Attackers (most wins)
 [top3Attackers, top3AttackersIndex] = maxk(winStat,k);
@@ -83,13 +83,11 @@ hold off
 %plot(top3Defenders./norm(top3Defenders))
 %%
 clf 
-%figure(6)
-
-
+figure(6)
 %plot(winStat)% ./norm(winStat)
 %title('Plot of matches won per each lineup')
 %xlabel('Lineup index')
-%ylabel('Matches won')
+%label('Matches won')
 
 
 %hold on
@@ -107,7 +105,7 @@ clf
 %ylabel('Matches Drawn')
 
 
-figure(9)
+%figure(9)
 plot(pointStat) % ./norm(pointStat)
 title('Plot of points per each lineup')
 xlabel('Lineup index')
