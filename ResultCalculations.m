@@ -69,7 +69,13 @@ figure(5)
 plot(top3GoalMakers./norm(top3GoalMakers))
 hold on
 plot(top3PointMakers./norm(top3PointMakers))
-%plot(top3Attackers./norm(top3Attackers))
+plot(top3Attackers./norm(top3Attackers))
+
+title('Plot of normalized sorted Goals, Points and matches won')
+xlabel('Lineups')
+ylabel('Score in respecive category')
+
+hold off
 %plot(top3Drawers./norm(top3Drawers))
 
 %plot(top3Defenders./norm(top3Defenders))
