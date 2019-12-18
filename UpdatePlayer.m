@@ -26,7 +26,7 @@ actionGoalDistance = 30;
 playerTeam=players{3}(indexOfPlayer);
 
 if playerTeam==0
-    goalPosition = [60 0];
+    goalPosition = [+60 0];%60 0
 else
     goalPosition = [-60 0];
 end
