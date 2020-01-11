@@ -37,9 +37,11 @@ formations{25}=[1 3 3];
 formations{26}=[0 4 3];
 formations{27}=[3 0 4];
 formations{28}=[2 1 4];
+
 formations{29}=[1 2 4];
 formations{30}=[0 3 4];
 formations{31}=[2 0 5];
+
 formations{32}=[1 1 5]; 
 formations{33}=[0 2 5];
 formations{34}=[1 0 6];  

@@ -1,5 +1,5 @@
 clear all
-load('36FormationSimulation16dec.mat')
+%load('36FormationSimulation16dec.mat')
 
 %%
 
@@ -26,7 +26,7 @@ goalsScoredStat = allStatisticsMatrix(5,:);
 goalsAgainstStat = allStatisticsMatrix(6,:);
 
 
-k = 3;
+k = 36;
 
 % Top 3 Attackers (most wins)
 [top3Attackers, top3AttackersIndex] = maxk(winStat,k);
@@ -66,10 +66,10 @@ scoareBoard = [top3Attackers; top3Defenders; top3Drawers; top3GoalMakers; top3Go
 scoareBoardIndex = [top3AttackersIndex; top3DefendersIndex; top3DrawersIndex; top3GoalMakersIndex; top3GoalKeepersIndex]'
 %%
 figure(5)
-plot(top3GoalMakers./norm(top3GoalMakers))
-hold on
-plot(top3PointMakers./norm(top3PointMakers))
-plot(top3Attackers./norm(top3Attackers))
+%plot(top3GoalMakers./norm(top3GoalMakers))
+%hold on
+plot(top3PointMakers)%./norm(top3PointMakers))
+%plot(top3Attackers./norm(top3Attackers))
 
 title('Plot of normalized sorted Goals, Points and matches won')
 xlabel('Lineups')
@@ -84,10 +84,10 @@ hold off
 %%
 clf 
 figure(6)
-%plot(winStat)% ./norm(winStat)
+%scatter(1:36,winStat)% ./norm(winStat)
 %title('Plot of matches won per each lineup')
 %xlabel('Lineup index')
-%label('Matches won')
+%abel('Matches won')
 
 
 %hold on
